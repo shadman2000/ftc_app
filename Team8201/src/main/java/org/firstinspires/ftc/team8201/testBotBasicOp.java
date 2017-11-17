@@ -30,8 +30,17 @@ public class testBotBasicOp extends LinearOpMode {
         
         //Running everything in the while loop
         while(opModeIsActive()) {
+            
+            //Defining te the powers of both mototrs according the right_trigger positions
             rightMotorPower = gamepad1.right_trigger;
             leftMotorPower = gamepad1.right_trigger;
+            
+            if(gamepad1.right_trigger > 0){
+                robot.rightMotor.setPower(rightMotorPower);
+                rightMotorPower = Range.clip(rightMotorPower, -0.0, 1.0);
+                robot.leftMotor.setPower(leftMotorPower);
+                leftMotorPower = Range.clip(leftMotorPower, -0.0, 1.0);
+            }
         }
     }
 }
