@@ -5,18 +5,18 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class HardwareK9bot
+public class HardwareK9botTest
 {
     /* Public OpMode members. */
-    public dcMotor leftWheel;
-    public dcMotor rightWheel;
+    public DcMotor leftWheel;
+    public DcMotor rightWheel;
     
     /* Local OpMode members. */
     HardwareMap hwMap;
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
-    public HardwareK9bot() {
+    public HardwareK9botTest() {
     }
 
     /* Initialize standard Hardware interfaces */

@@ -4,9 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcontroller.external.samples.HardwareK9botTest;
+
 @TeleOp(name = "Test TeleOp", group = "Testing")
 public class testBotBasicOp extends LinearOpMode {
-    HardwareK9bot robot = new HardwareK9bot();
+    HardwareK9botTest robot = new HardwareK9botTest();
     
     @Override
     public void runOpMode() {
@@ -17,7 +19,7 @@ public class testBotBasicOp extends LinearOpMode {
         double leftMotorPower = 0.0;
         
         //motor right
-        double RightMotorPower =0.0;
+        double rightMotorPower =0.0;
         
         //Initializing the hardware
         robot.init(hardwareMap);
