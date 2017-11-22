@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team8201;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name = "Test TeleOp", group = "Testing")
 public class testBotBasicOp extends LinearOpMode {
@@ -37,23 +38,21 @@ public class testBotBasicOp extends LinearOpMode {
                 //Defining te the powers of both mototrs according the right_trigger positions
                 rightMotorPower = gamepad1.right_trigger;
                 leftMotorPower = gamepad1.right_trigger;
-            
-                robot.rightMotor.setPower(rightMotorPower);
+                
+                //Setting the range of the motor power
                 rightMotorPower = Range.clip(rightMotorPower, 0.0, 1.0);
-                robot.leftMotor.setPower(leftMotorPower);
                 leftMotorPower = Range.clip(leftMotorPower, 0.0, 1.0);
             }
             
             //left_trigger
-            else if(gamepad1.right_trigger < 0){
+            else if(gamepad1.left_trigger > 0){
                 
                 //Defining te the powers of both mototrs according the left_trigger positions
                 rightMotorPower = gamepad1.left_trigger;
                 leftMotorPower = gamepad1.left_trigger;
                 
-                robot.rightMotor.setPower(rightMotorPower);
+                //Setting the range of the motor power
                 rightMotorPower = Range.clip(rightMotorPower, 0.0, -1.0);
-                robot.leftMotor.setPower(leftMotorPower);
                 leftMotorPower = Range.clip(leftMotorPower, 0.0, -1.0);
             }
             
@@ -64,8 +63,8 @@ public class testBotBasicOp extends LinearOpMode {
             }
             
             //Sending the powers for wheel to the motors
-            robot.leftMotor.setPower(leftMotorPower);
-            robot.rightMotorPower.setPower(rightMotorPower);
+            robot.leftWheel.setPower(leftMotorPower);
+            robot.rightWheel.setPower(rightMotorPower);
         }
     }
 }

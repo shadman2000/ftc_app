@@ -25,8 +25,8 @@ public class HardwareK9bot
         hwMap = ahwMap; //Get this line clear****
 
         // Define and Initialize Motors
-        leftWheel  = hwMap.get(DcMotor.class, "left_wheel");
-        rightWheel = hwMap.get(DcMotor.class, "right_wheel");
+        leftWheel  = hwMap.get(DcMotor.class, "leftWheel");
+        rightWheel = hwMap.get(DcMotor.class, "rightWheel");
 
         // Set all motors to zero power
         leftWheel.setPower(0);
