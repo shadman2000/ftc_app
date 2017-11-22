@@ -36,5 +36,7 @@ public class HardwareK9botTest
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         leftWheel.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightWheel.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        leftWheel.setDirection(DcMotor.Direction.REVERSE);
     }
 }
