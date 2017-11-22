@@ -42,6 +42,15 @@ public class testBotBasicOp extends LinearOpMode {
                 //Setting the range of the motor power
                 rightMotorPower = Range.clip(rightMotorPower, 0.0, 1.0);
                 leftMotorPower = Range.clip(leftMotorPower, 0.0, 1.0);
+                
+                //Turning while trigger is pressed
+                if(gamepad1.left_stick_x > 0 && gamepad1.left_stick_x < 1){
+                    rightMotorPower = leftMotorPower/2;
+                }
+                
+                else if(gamepad1.left_stick_x < 0 && gamepad1.left_stick_x > -1){
+                    leftMotorPower = rightMotorPower/2;
+                }
             }
             
             //left_trigger
