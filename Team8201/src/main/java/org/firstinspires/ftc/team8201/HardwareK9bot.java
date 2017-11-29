@@ -1,4 +1,6 @@
-package org.firstinspires.ftc.robotcontroller.external.samples;
+package org.firstinspires.ftc.team8201;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -44,7 +46,7 @@ public class HardwareK9bot
         //Suck-in Wheels
         suckInWheeleft  = hwMap.get(DcMotor.class, "suckInLeftWheel");
         suckInWheelright = hwMap.get(DcMotor.class, "suckInWheelright");
-        suckInWHeelleft.setDirection(DcMotor.Direction.REVERSE);
+        suckInWheeleft.setDirection(DcMotor.Direction.REVERSE);
         
         //Elevator
         elevator  = hwMap.get(DcMotor.class, "elevator");
