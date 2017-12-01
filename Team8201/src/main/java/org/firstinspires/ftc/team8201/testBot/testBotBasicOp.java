@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwareK9botTest;
+import org.firstinspires.ftc.team8201.testBot.HardwareK9botTest;
 
 @TeleOp(name = "Test TeleOp", group = "Testing")
 public class testBotBasicOp extends LinearOpMode {
