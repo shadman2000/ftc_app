@@ -10,17 +10,17 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class HardwareK9bot
 {
-    /* Public OpMode members. */
+    //Motors
     public DcMotor rightWheel;
     public DcMotor leftWheel;
     public DcMotor suckInWheelright;
     public DcMotor suckInWheeleft;
     public DcMotor elevator;
-    /*
     
-    Servo will be added later
-    
-    */
+    //Servo(s)
+    public Servo gemArm;
+    public Servo cubeHolderLeft;
+    public Servo cubeHolderRight;
 
 
     /* Local OpMode members. */
@@ -28,8 +28,7 @@ public class HardwareK9bot
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
-    public HardwareK9bot() {
-    }
+    public HardwareK9bot() {}
 
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap) {
@@ -51,9 +50,10 @@ public class HardwareK9bot
         //Elevator
         elevator  = hwMap.get(DcMotor.class, "elevator");
         
-        /*
-        Servo will be here soon
-        */
+        //Servo(s)
+        gemArm = hwMap.get(Servo.class, "gemArm");
+        cubeHolderLeft = hwMap.get(Servo.class, "leftCubeHolder");
+        cubeHolderRight = hwMap.get(Servo.class, "rightCubeHolder");
 
         // Set all motors to zero power
         leftWheel.setPower(0);
@@ -62,9 +62,11 @@ public class HardwareK9bot
         suckInWheelright.setPower(0);
         elevator.setPower(0);
         
-        /*
-        Servo will be here soon 
-        */
+        //Servo(s)
+        gemArm.setPosition(0);              //Needs to be tested
+        cubeHolderLeft.setPosition(0.18);   //Needs to be tested
+        cubeHolderRight.setPosition(0.2);   //Needs to be tested
+
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.

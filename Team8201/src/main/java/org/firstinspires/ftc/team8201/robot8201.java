@@ -16,17 +16,13 @@ public class robot8201 extends LinearOpMode {
     public void runOpMode() {
 
         //Declare the variables
+        //Motor(s)
         double leftWheelsPower = 0.0;
         double rightWheelsPower = 0.0;
-        double gemArmPower = 0.0;           //Not sure is it a servo or motor
         double rightCollectorPower = 0.0;
         double leftCollectorPower = 0.0;
         double elevatorPower = 0.0;
-
-        double leftServoPosition = 0.0;      //Needs to be tested
-        double rightServoPosition = 0.0;     //Needs to be tested
-        double servoIncrease = 0.25;         //Needs to be tested
-
+        
         //Initializing the hardwareK9bot file
         robot.init(hardwareMap);
 
@@ -124,6 +120,28 @@ public class robot8201 extends LinearOpMode {
 
                 //Ranging the right stick power
                 elevatorPower = Range.clip(elevatorPower, 0.0, -1.0);
+            }
+            
+            //The gem arm
+            //drop
+            if(gamepad2.dpad_down){
+                robot.gemArm.setPosition(1); //Need to test accoring to the initial
+            }
+            
+            //up
+            if(gamepad2.dpad_up){
+                robot.gemArm.setPosition(0); //Need to test according to the initial
+            }
+            
+            //MUST BE TESTED
+            //The cube collectors
+            if(gamepad2.right_bumper){
+                robot.cubeHolderLeft.setPosition(0.35);     //NEEDS TO BE TESTED
+                robot.cubeHolderRight.setPosition(0.4);     //NEEDS TO BE TESTED
+            }
+            if(gamepad2.left_bumper){
+                robot.cubeHolderLeft.setPosition(0.18);
+                robot.cubeHolderRight.setPosition(0.2);
             }
 
             //setting all motor power to 0 if nothing is pressed
