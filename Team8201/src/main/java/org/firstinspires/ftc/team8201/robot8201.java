@@ -113,7 +113,7 @@ public class robot8201 extends LinearOpMode {
                 //Ranging the right stick power
                 elevatorPower = Range.clip(elevatorPower, 0.0, 1.0);
             }
-            if (gamepad1.right_stick_y < 0) {
+            if (gamepad2.right_stick_y < 0) {
 
                 //Motor power goes up so as the elevator
                 elevatorPower = gamepad2.right_stick_y;
