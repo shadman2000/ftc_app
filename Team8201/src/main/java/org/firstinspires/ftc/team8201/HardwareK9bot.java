@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.team8201;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -44,7 +42,8 @@ public class HardwareK9bot
         leftWheelBack  = hwMap.get(DcMotor.class, "leftWheelBack");
         rightWheelFront = hwMap.get(DcMotor.class, "rightWheelFront");
         rightWheelBack = hwMap.get(DcMotor.class, "rightWheelBack");
-        leftWheel.setDirection(DcMotor.Direction.REVERSE);
+        leftWheelFront.setDirection(DcMotor.Direction.REVERSE);
+        leftWheelBack.setDirection(DcMotor.Direction.REVERSE);
         
         //Suck-in Wheels
         suckInWheeleft  = hwMap.get(DcMotor.class, "suckInLeftWheel");
@@ -60,8 +59,10 @@ public class HardwareK9bot
         cubeHolderRight = hwMap.get(Servo.class, "rightCubeHolder");
 
         // Set all motors to zero power
-        leftWheel.setPower(0);
-        rightWheel.setPower(0);
+        leftWheelFront.setPower(0);
+        leftWheelBack.setPower(0);
+        rightWheelFront.setPower(0);
+        rightWheelBack.setPower(0);
         suckInWheeleft.setPower(0);
         suckInWheelright.setPower(0);
         elevator.setPower(0);
@@ -74,8 +75,10 @@ public class HardwareK9bot
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
-        leftWheel.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightWheel.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftWheelFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftWheelBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightWheelFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightWheelBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         suckInWheeleft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         suckInWheelright.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
