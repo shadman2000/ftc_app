@@ -154,8 +154,10 @@ public class robot8201 extends LinearOpMode {
             }
 
             //Sending the powers as motor Power
-            robot.leftWheel.setPower(leftWheelsPower);
-            robot.rightWheel.setPower(rightWheelsPower);
+            robot.leftWheelFront.setPower(leftWheelsPower);
+            robot.leftWheelBack.setPower(leftWheelsPower);
+            robot.rightWheelBack.setPower(rightWheelsPower);
+            robot.rightWheelFront.setPower(rightWheelsPower);
             robot.suckInWheeleft.setPower(leftCollectorPower);
             robot.suckInWheelright.setPower(rightCollectorPower);
             robot.elevator.setPower(elevatorPower);

@@ -11,8 +11,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class HardwareK9bot
 {
     //Motors
-    public DcMotor rightWheel;
-    public DcMotor leftWheel;
+    public DcMotor rightWheelFront;
+    public DcMotor rightWheelBack;
+    public DcMotor leftWheelFront;
+    public DcMotor leftWheelBack;
     public DcMotor suckInWheelright;
     public DcMotor suckInWheeleft;
     public DcMotor elevator;
@@ -38,8 +40,10 @@ public class HardwareK9bot
         // Define and Initialize Motors
         
         //Wheels
-        leftWheel  = hwMap.get(DcMotor.class, "leftWheel");
-        rightWheel = hwMap.get(DcMotor.class, "rightWheel");
+        leftWheelFront  = hwMap.get(DcMotor.class, "leftWheelFront");
+        leftWheelBack  = hwMap.get(DcMotor.class, "leftWheelBack");
+        rightWheelFront = hwMap.get(DcMotor.class, "rightWheelFront");
+        rightWheelBack = hwMap.get(DcMotor.class, "rightWheelBack");
         leftWheel.setDirection(DcMotor.Direction.REVERSE);
         
         //Suck-in Wheels
