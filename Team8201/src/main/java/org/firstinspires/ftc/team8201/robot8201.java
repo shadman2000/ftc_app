@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "Test TeleOp", group = "Testing")
+@TeleOp(name = "robot8201", group = "Testing")
 public class robot8201 extends LinearOpMode {
 
     //Creating an instance of HardwareK9bot as "robot"
@@ -75,90 +75,90 @@ public class robot8201 extends LinearOpMode {
             //The suck-in wheels
             //Need to be tested which way the wheel rotates
 
-            //The wheels of the suck-in will both rotate inwards with right_trigger
-            if (gamepad2.right_trigger > 0) {
-
-                //Redefining the power of both wheel (suck-in) according to the position of the trigger
-                leftCollectorPower = gamepad2.right_trigger;
-                rightCollectorPower = gamepad2.right_trigger;
-
-                //Setting the range of the motor power
-                leftCollectorPower = Range.clip(leftCollectorPower, 0.0, 1.0);
-                rightCollectorPower = Range.clip(rightCollectorPower, 0.0, 1.0);
-            }
-
-            //The wheels of the suck-in will both rotate outwards with left_trigger
-            if (gamepad2.left_trigger > 0) {
-
-                //Redefining the power of both wheel (suck-in) according to the position of the trigger
-                leftCollectorPower = gamepad2.right_trigger;
-                rightCollectorPower = gamepad2.right_trigger;
-
-                //Setting the range of the motor power
-                leftCollectorPower = Range.clip(leftCollectorPower, 0.0, -1.0);
-                rightCollectorPower = Range.clip(rightCollectorPower, 0.0, -1.0);
-            }
-
-            //The elevator
-            //Need to be tested which way the wheel rotates
-
-            //The motors will go both up and down according to the y_axis of gamepad2 rightstick
-            if (gamepad2.right_stick_y > 0) {
-
-                //Motor power goes up so as the elevator
-                elevatorPower = gamepad2.right_stick_y;
-
-                //Ranging the right stick power
-                elevatorPower = Range.clip(elevatorPower, 0.0, 1.0);
-            }
-            if (gamepad2.right_stick_y < 0) {
-
-                //Motor power goes up so as the elevator
-                elevatorPower = gamepad2.right_stick_y;
-
-                //Ranging the right stick power
-                elevatorPower = Range.clip(elevatorPower, 0.0, -1.0);
-            }
-            
-            //The gem arm
-            //drop
-            if(gamepad2.dpad_down){
-                robot.gemArm.setPosition(1); //Need to test accoring to the initial
-            }
-            
-            //up
-            if(gamepad2.dpad_up){
-                robot.gemArm.setPosition(0); //Need to test according to the initial
-            }
-            
-            //MUST BE TESTED
-            //The cube collectors
-            if(gamepad2.right_bumper){
-                robot.cubeHolderLeft.setPosition(0.35);     //NEEDS TO BE TESTED
-                robot.cubeHolderRight.setPosition(0.4);     //NEEDS TO BE TESTED
-            }
-            if(gamepad2.left_bumper){
-                robot.cubeHolderLeft.setPosition(0.18);
-                robot.cubeHolderRight.setPosition(0.2);
-            }
-
-            //setting all motor power to 0 if nothing is pressed
-            else {
-                rightWheelsPower = 0;
-                leftWheelsPower = 0;
-                leftCollectorPower = 0;
-                rightCollectorPower = 0;
-                //Need to test if elevator needed to be set to zero
-            }
+//            //The wheels of the suck-in will both rotate inwards with right_trigger
+//            if (gamepad2.right_trigger > 0) {
+//
+//                //Redefining the power of both wheel (suck-in) according to the position of the trigger
+//                leftCollectorPower = gamepad2.right_trigger;
+//                rightCollectorPower = gamepad2.right_trigger;
+//
+//                //Setting the range of the motor power
+//                leftCollectorPower = Range.clip(leftCollectorPower, 0.0, 1.0);
+//                rightCollectorPower = Range.clip(rightCollectorPower, 0.0, 1.0);
+//            }
+//
+//            //The wheels of the suck-in will both rotate outwards with left_trigger
+//            if (gamepad2.left_trigger > 0) {
+//
+//                //Redefining the power of both wheel (suck-in) according to the position of the trigger
+//                leftCollectorPower = gamepad2.right_trigger;
+//                rightCollectorPower = gamepad2.right_trigger;
+//
+//                //Setting the range of the motor power
+//                leftCollectorPower = Range.clip(leftCollectorPower, 0.0, -1.0);
+//                rightCollectorPower = Range.clip(rightCollectorPower, 0.0, -1.0);
+//            }
+//
+//            //The elevator
+//            //Need to be tested which way the wheel rotates
+//
+//            //The motors will go both up and down according to the y_axis of gamepad2 rightstick
+//            if (gamepad2.right_stick_y > 0) {
+//
+//                //Motor power goes up so as the elevator
+//                elevatorPower = gamepad2.right_stick_y;
+//
+//                //Ranging the right stick power
+//                elevatorPower = Range.clip(elevatorPower, 0.0, 1.0);
+//            }
+//            if (gamepad2.right_stick_y < 0) {
+//
+//                //Motor power goes up so as the elevator
+//                elevatorPower = gamepad2.right_stick_y;
+//
+//                //Ranging the right stick power
+//                elevatorPower = Range.clip(elevatorPower, 0.0, -1.0);
+//            }
+//
+//            //The gem arm
+//            //drop
+//            if(gamepad2.dpad_down){
+//                robot.gemArm.setPosition(1); //Need to test accoring to the initial
+//            }
+//
+//            //up
+//            if(gamepad2.dpad_up){
+//                robot.gemArm.setPosition(0); //Need to test according to the initial
+//            }
+//
+//            //MUST BE TESTED
+//            //The cube collectors
+//            if(gamepad2.right_bumper){
+//                robot.cubeHolderLeft.setPosition(0.35);     //NEEDS TO BE TESTED
+//                robot.cubeHolderRight.setPosition(0.4);     //NEEDS TO BE TESTED
+//            }
+//            if(gamepad2.left_bumper){
+//                robot.cubeHolderLeft.setPosition(0.18);
+//                robot.cubeHolderRight.setPosition(0.2);
+//            }
+//
+//            //setting all motor power to 0 if nothing is pressed
+//            else {
+//                rightWheelsPower = 0;
+//                leftWheelsPower = 0;
+//                leftCollectorPower = 0;
+//                rightCollectorPower = 0;
+//                //Need to test if elevator needed to be set to zero
+//            }
 
             //Sending the powers as motor Power
             robot.leftWheelFront.setPower(leftWheelsPower);
             robot.leftWheelBack.setPower(leftWheelsPower);
             robot.rightWheelBack.setPower(rightWheelsPower);
             robot.rightWheelFront.setPower(rightWheelsPower);
-            robot.suckInWheeleft.setPower(leftCollectorPower);
-            robot.suckInWheelright.setPower(rightCollectorPower);
-            robot.elevator.setPower(elevatorPower);
+//            robot.suckInWheeleft.setPower(leftCollectorPower);
+//            robot.suckInWheelright.setPower(rightCollectorPower);
+//            robot.elevator.setPower(elevatorPower);
         }
     }
 }
