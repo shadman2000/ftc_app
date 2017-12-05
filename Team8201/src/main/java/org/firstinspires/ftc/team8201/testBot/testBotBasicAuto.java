@@ -6,12 +6,13 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
+import org.firstinspires.ftc.team8201.testBot.HardwareK9botTest;
 
 @Autonomous(name="Pushbot: Auto Drive By Time", group="Pushbot")
 @Disabled
 public class testBotBasicAuto extends LinearOpMode {
 
-    HardwarePushbot robot   = new HardwarePushbot();    // Use a Pushbot's hardware
+    HardwareK9botTest robot   = new HardwareK9botTest();    // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();    //runtime instance
     
     //Declaring the variables
@@ -41,8 +42,8 @@ public class testBotBasicAuto extends LinearOpMode {
         //Displacement should be 0 (For Physics MSDUKE <3)
         
         //Step 1
-        robot.leftWheel.setPosition(drive);
-        robot.rightWheel.setPosition(drive);
+        robot.leftWheel.setPower(drive);
+        robot.rightWheel.setPower(drive);
         runtime.reset();
         while(opModeIsActive() && (runtime.seconds() < 3.0)){
             telemetry.addData("Path","Leg 1: %2.5f S Elapsed",runtime.seconds());
@@ -50,8 +51,8 @@ public class testBotBasicAuto extends LinearOpMode {
         }
         
         //Step 2
-        robot.leftWheel.setPosition(-drive);
-        robot.rightWheel.setPosition(drive);
+        robot.leftWheel.setPower(-drive);
+        robot.rightWheel.setPower(drive);
         runtime.reset();
         while(opModeIsActive() && (runtime.seconds() < 1.5)){
             telemetry.addData("Path","Leg 2: %2.5f S Elapsed",runtime.seconds());
@@ -59,8 +60,8 @@ public class testBotBasicAuto extends LinearOpMode {
         }
         
         //Step 3
-        robot.leftWheel.setPosition(drive);
-        robot.rightWheel.setPosition(drive);
+        robot.leftWheel.setPower(drive);
+        robot.rightWheel.setPower(drive);
         runtime.reset();
         while(opModeIsActive() && (runtime.seconds() < 2.0)){
             telemetry.addData("Path","Leg 2: %2.5f S Elapsed",runtime.seconds());
@@ -68,8 +69,8 @@ public class testBotBasicAuto extends LinearOpMode {
         }
         
         //Step 4
-        robot.leftWheel.setPosition(-drive);
-        robot.rightWheel.setPosition(-drive);
+        robot.leftWheel.setPower(-drive);
+        robot.rightWheel.setPower(-drive);
         runtime.reset();
         while(opModeIsActive() && (runtime.seconds() < 2.0)){
             telemetry.addData("Path","Leg 2: %2.5f S Elapsed",runtime.seconds());
@@ -77,8 +78,8 @@ public class testBotBasicAuto extends LinearOpMode {
         }
         
         //Step 5
-        robot.leftWheel.setPosition(-drive);
-        robot.rightWheel.setPosition(drive);
+        robot.leftWheel.setPower(-drive);
+        robot.rightWheel.setPower(drive);
         runtime.reset();
         while(opModeIsActive() && (runtime.seconds() < 1.5)){
             telemetry.addData("Path","Leg 2: %2.5f S Elapsed",runtime.seconds());
@@ -86,8 +87,8 @@ public class testBotBasicAuto extends LinearOpMode {
         }
         
         //Step 6
-        robot.leftWheel.setPosition(drive);
-        robot.rightWheel.setPosition(drive);
+        robot.leftWheel.setPower(drive);
+        robot.rightWheel.setPower(drive);
         runtime.reset();
         while(opModeIsActive() && (runtime.seconds() < 3.0)){
             telemetry.addData("Path","Leg 2: %2.5f S Elapsed",runtime.seconds());
