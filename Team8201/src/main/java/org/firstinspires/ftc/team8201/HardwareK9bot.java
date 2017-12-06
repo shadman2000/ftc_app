@@ -42,8 +42,8 @@ public class HardwareK9bot
         leftWheelBack  = hwMap.get(DcMotor.class, "leftWheelBack");
         rightWheelFront = hwMap.get(DcMotor.class, "rightWheelFront");
         rightWheelBack = hwMap.get(DcMotor.class, "rightWheelBack");
-        leftWheelFront.setDirection(DcMotor.Direction.REVERSE);
-        leftWheelBack.setDirection(DcMotor.Direction.REVERSE);
+        //leftWheelFront.setDirection(DcMotor.Direction.REVERSE);
+        //leftWheelBack.setDirection(DcMotor.Direction.REVERSE);
         
         //Suck-in Wheels
 //        suckInWheeleft  = hwMap.get(DcMotor.class, "suckInLeftWheel");

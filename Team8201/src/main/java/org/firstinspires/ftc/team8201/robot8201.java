@@ -2,7 +2,6 @@ package org.firstinspires.ftc.team8201;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name = "robot8201", group = "Testing")
 public class robot8201 extends LinearOpMode {
@@ -15,8 +14,10 @@ public class robot8201 extends LinearOpMode {
 
         //Declare the variables
         //Motor(s)
-        double leftWheelsPower = 0.0;
-        double rightWheelsPower = 0.0;
+        double leftWheelPowerFront = 0.0;
+        double leftWheelPowerBack = 0.0;
+        double rightWheelPowerFront = 0.0;
+        double rightWheelPowerBack = 0.0;
         double rightCollectorPower = 0.0;
         double leftCollectorPower = 0.0;
         double elevatorPower = 0.0;
@@ -26,6 +27,7 @@ public class robot8201 extends LinearOpMode {
 
         //Ready message
         telemetry.addData("Say ", "8201 robot is ready");
+
         telemetry.update();
 
         //Wait for play
@@ -35,42 +37,49 @@ public class robot8201 extends LinearOpMode {
         while (opModeIsActive()) {
 
             //Acceleration of both wheels on right trigger
-            if (gamepad1.right_trigger > 0) {
 
                 //Redefining the power of both wheel according to the position of the trigger
-                leftWheelsPower = gamepad1.right_trigger;
-                rightWheelsPower = gamepad1.right_trigger;
+                leftWheelPowerFront = gamepad1.right_stick_y;
+                leftWheelPowerBack = gamepad1.right_stick_y;
+                rightWheelPowerFront = gamepad1.right_stick_y;
+                rightWheelPowerBack = gamepad1.right_stick_y;
 
-                //ranging the power of wheelPowers
-                rightWheelsPower = Range.clip(rightWheelsPower, 0.0, 1.0);
-                leftWheelsPower = Range.clip(leftWheelsPower, 0.0, 1.0);
 
-                //Setting wheelPowers for turning
-                if (gamepad1.left_stick_x > 0) {
-                    rightWheelsPower *= -1;
-                } else if (gamepad1.left_stick_x < 1) {
-                    leftWheelsPower *= -1;
-                }
-            }
+//                //Setting wheelPowers for turning
+//                if (gamepad1.left_stick_x > 0) {
+//                    rightWheelPowerFront *= -1;
+//                    rightWheelPowerBack *= -1;
+//                    leftWheelPowerFront = gamepad1.right_trigger;
+//                    leftWheelPowerBack = gamepad1.right_trigger;
+//                } else if (gamepad1.left_stick_x < 1) {
+//                    leftWheelPowerFront *= -1;
+//                    leftWheelPowerBack *= -1;
+//                    rightWheelPowerFront = gamepad1.right_trigger;
+//                    rightWheelPowerBack = gamepad1.right_trigger;
+//                }
+
 
             //Deceleration of both wheels on left trigger
-            if (gamepad1.left_trigger > 0) {
 
                 //Redefining the power of both wheel according to the position of the trigger
-                leftWheelsPower = gamepad1.left_trigger;
-                rightWheelsPower = gamepad1.left_trigger;
+                leftWheelPowerFront = gamepad1.left_stick_y;
+                leftWheelPowerBack = gamepad1.left_stick_y;
+                rightWheelPowerFront = gamepad1.left_stick_y;
+                rightWheelPowerBack = gamepad1.left_stick_y;
 
-                //ranging the power of wheelPowers
-                rightWheelsPower = Range.clip(rightWheelsPower, 0.0, -1.0);
-                leftWheelsPower = Range.clip(leftWheelsPower, 0.0, -1.0);
 
-                //Setting wheelPowers for turning
-                if (gamepad1.left_stick_x > 0) {
-                    rightWheelsPower *= -1;
-                } else if (gamepad1.left_stick_x < 1) {
-                    leftWheelsPower *= -1;
-                }
-            }
+//                //Setting wheelPowers for turning
+//                if (gamepad1.left_stick_x > 0) {
+//                    rightWheelPowerFront *= -1;
+//                    rightWheelPowerBack *= -1;
+//                    leftWheelPowerFront = gamepad1.left_trigger;
+//                    leftWheelPowerBack = gamepad1.left_trigger;
+//                } else if (gamepad1.left_stick_x < 0) {
+//                    leftWheelPowerFront *= -1;
+//                    leftWheelPowerBack *= -1;
+//                    rightWheelPowerFront = gamepad1.left_trigger;
+//                    rightWheelPowerBack = gamepad1.left_trigger;
+//                }
 
             //The suck-in wheels
             //Need to be tested which way the wheel rotates
@@ -142,23 +151,31 @@ public class robot8201 extends LinearOpMode {
 //                robot.cubeHolderRight.setPosition(0.2);
 //            }
 //
-//            //setting all motor power to 0 if nothing is pressed
-//            else {
-//                rightWheelsPower = 0;
-//                leftWheelsPower = 0;
-//                leftCollectorPower = 0;
+            //setting all motor power to 0 if nothing is pressed
+            if(gamepad1.right_trigger <= 0 && gamepad1.left_trigger <= 0) {         //DO NOT USE AN ELSE!!!!!!!!!!!!!!!!!
+                rightWheelPowerFront = 0;
+                rightWheelPowerBack = 0;
+                leftWheelPowerFront = 0;
+                leftWheelPowerBack = 0;
+ //               leftCollectorPower = 0;
 //                rightCollectorPower = 0;
-//                //Need to test if elevator needed to be set to zero
-//            }
+                //Need to test if elevator needed to be set to zero
+            }
 
             //Sending the powers as motor Power
-            robot.leftWheelFront.setPower(leftWheelsPower);
-            robot.leftWheelBack.setPower(leftWheelsPower);
-            robot.rightWheelBack.setPower(rightWheelsPower);
-            robot.rightWheelFront.setPower(rightWheelsPower);
+
+            robot.leftWheelFront.setPower(leftWheelPowerFront);
+            robot.leftWheelBack.setPower(leftWheelPowerBack);
+            robot.rightWheelBack.setPower(rightWheelPowerFront);
+            robot.rightWheelFront.setPower(rightWheelPowerBack);
 //            robot.suckInWheeleft.setPower(leftCollectorPower);
 //            robot.suckInWheelright.setPower(rightCollectorPower);
 //            robot.elevator.setPower(elevatorPower);
+
+            //Testing messages
+
+            telemetry.addData("Value of Left Trigger:" , "");
+            telemetry.update();
         }
     }
 }

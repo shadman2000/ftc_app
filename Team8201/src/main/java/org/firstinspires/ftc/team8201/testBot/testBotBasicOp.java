@@ -24,9 +24,7 @@ public class testBotBasicOp extends LinearOpMode {
         //Initializing the hardware
         robot.init(hardwareMap);
 
-        //Testing messages
-        telemetry.addData("Say ","I am ready 8201 testBot");
-        telemetry.update();
+
 
         //Wait for play
         waitForStart();
@@ -89,6 +87,10 @@ public class testBotBasicOp extends LinearOpMode {
             //Sending the powers for wheel to the motors
             robot.leftWheel.setPower(leftMotorPower);
             robot.rightWheel.setPower(rightMotorPower);
+
+            telemetry.addData("RWP ", rightMotorPower);
+            telemetry.addData("LWP ", leftMotorPower);
+            telemetry.update();
         }
     }
 }
