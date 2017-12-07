@@ -135,12 +135,43 @@ public class robot8201 extends LinearOpMode {
 //            //MUST BE TESTED
             //The cube collectors
             if(gamepad2.right_trigger > 0){
-                rightCollectorPower+=0.1;
-                leftCollectorPower+=0.1;
+
+                //Increasing Servo power
+                rightCollectorPower-=0.05;
+                leftCollectorPower+=0.05;
+
+                  //Limiting the servo power
+//                if(rightCollectorPower >= 1 || leftCollectorPower >= 1){
+//                    rightCollectorPower = 1;
+//                    leftCollectorPower = 1;
+//                }
                 robot.cubeHolderLeft.setPosition(leftCollectorPower);     //NEEDS TO BE TESTED
                 robot.cubeHolderRight.setPosition(rightCollectorPower);     //NEEDS TO BE TESTED
             }
+
+            if(rightCollectorPower >= 1){
+                rightCollectorPower = 1;
+            }
+            if(rightCollectorPower <= 0){
+                rightCollectorPower = 0;
+            }
+            if(leftCollectorPower >= 1){
+                leftCollectorPower = 1;
+            }
+            if(leftCollectorPower <= 0){
+                leftCollectorPower = 0;
+            }
+
             if(gamepad2.left_trigger > 0){
+                //Increasing Servo power
+                rightCollectorPower+=0.05;
+                leftCollectorPower-=0.05;
+
+               //Limiting the servo power
+//                if(rightCollectorPower <= 0.15 || leftCollectorPower <=0.15){
+//                    rightCollectorPower = 0.15;
+//                    leftCollectorPower = 0.15;
+//                }
                 robot.cubeHolderLeft.setPosition(leftCollectorPower);
                 robot.cubeHolderRight.setPosition(rightCollectorPower);
             }
@@ -168,10 +199,8 @@ public class robot8201 extends LinearOpMode {
 
             //Testing messages
 
-            telemetry.addData("rightfront" , rightWheelPowerFront);
-            telemetry.addData("rightback" , rightWheelPowerBack);
-            telemetry.addData("leftfront" , leftWheelPowerFront);
-            telemetry.addData("leftback" , leftWheelPowerBack);
+            telemetry.addData("leftServo" , leftCollectorPower);
+            telemetry.addData("rightServo" , rightCollectorPower);
             telemetry.addData("Value of Left Trigger:" , "");
             telemetry.update();
         }

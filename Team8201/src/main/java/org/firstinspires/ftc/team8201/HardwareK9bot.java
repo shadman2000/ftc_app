@@ -69,8 +69,8 @@ public class HardwareK9bot
         
         //Servo(s)
 //        gemArm.setPosition(0);              //Needs to be tested
-//        cubeHolderLeft.setPosition(0.18);   //Needs to be tested
-//        cubeHolderRight.setPosition(0.2);   //Needs to be tested
+        //cubeHolderLeft.setPosition(0.15);   //Needs to be tested
+        //cubeHolderRight.setPosition(0.15);   //Needs to be tested
 
 
         // Set all motors to run without encoders.
