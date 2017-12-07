@@ -39,37 +39,37 @@ public class robot8201 extends LinearOpMode {
             //Acceleration of both wheels on right trigger
             if(gamepad1.right_trigger > 0) {
                 //Redefining the power of both wheel according to the position of the trigger
-                leftWheelPowerFront = gamepad1.right_trigger;
-                leftWheelPowerBack = gamepad1.right_trigger;
-                rightWheelPowerFront = gamepad1.right_trigger;
-                rightWheelPowerBack = gamepad1.right_trigger;
+                leftWheelPowerFront = -gamepad1.right_trigger;
+                leftWheelPowerBack = -gamepad1.right_trigger;
+                rightWheelPowerFront = -gamepad1.right_trigger;
+                rightWheelPowerBack = -gamepad1.right_trigger;
 
                 //Setting wheelPowers for turning
                 if (gamepad1.left_stick_x > 0) {
-                    rightWheelPowerFront = -gamepad1.right_trigger;
-                    rightWheelPowerBack = -gamepad1.right_trigger;
+                    rightWheelPowerFront = gamepad1.right_trigger;
+                    rightWheelPowerBack = gamepad1.right_trigger;
                 } else if (gamepad1.left_stick_x < 0) {
-                    leftWheelPowerFront = -gamepad1.right_trigger;
-                    leftWheelPowerBack = -gamepad1.right_trigger;
+                    leftWheelPowerFront = gamepad1.right_trigger;
+                    leftWheelPowerBack = gamepad1.right_trigger;
                 }
             }
 
             //Deceleration of both wheels on left trigger
             if(gamepad1.left_trigger > 0) {
                 //Redefining the power of both wheel according to the position of the trigger
-                leftWheelPowerFront = -gamepad1.left_trigger;
-                leftWheelPowerBack = -gamepad1.left_trigger;
-                rightWheelPowerFront = -gamepad1.left_trigger;
-                rightWheelPowerBack = -gamepad1.left_trigger;
+                leftWheelPowerFront = gamepad1.left_trigger;
+                leftWheelPowerBack = gamepad1.left_trigger;
+                rightWheelPowerFront = gamepad1.left_trigger;
+                rightWheelPowerBack = gamepad1.left_trigger;
 
 
                 //Setting wheelPowers for turning
                 if (gamepad1.left_stick_x > 0) {
-                    rightWheelPowerFront = gamepad1.left_trigger;
-                    rightWheelPowerBack = gamepad1.left_trigger;
+                    rightWheelPowerFront = -gamepad1.left_trigger;
+                    rightWheelPowerBack = -gamepad1.left_trigger;
                 } else if (gamepad1.left_stick_x < 0) {
-                    leftWheelPowerFront = gamepad1.left_trigger;
-                    leftWheelPowerBack = gamepad1.left_trigger;
+                    leftWheelPowerFront = -gamepad1.left_trigger;
+                    leftWheelPowerBack = -gamepad1.left_trigger;
                 }
             }
 
@@ -133,15 +133,17 @@ public class robot8201 extends LinearOpMode {
 //            }
 //
 //            //MUST BE TESTED
-//            //The cube collectors
-//            if(gamepad2.right_bumper){
-//                robot.cubeHolderLeft.setPosition(0.35);     //NEEDS TO BE TESTED
-//                robot.cubeHolderRight.setPosition(0.4);     //NEEDS TO BE TESTED
-//            }
-//            if(gamepad2.left_bumper){
-//                robot.cubeHolderLeft.setPosition(0.18);
-//                robot.cubeHolderRight.setPosition(0.2);
-//            }
+            //The cube collectors
+            if(gamepad2.right_trigger > 0){
+                rightCollectorPower+=0.1;
+                leftCollectorPower+=0.1;
+                robot.cubeHolderLeft.setPosition(leftCollectorPower);     //NEEDS TO BE TESTED
+                robot.cubeHolderRight.setPosition(rightCollectorPower);     //NEEDS TO BE TESTED
+            }
+            if(gamepad2.left_trigger > 0){
+                robot.cubeHolderLeft.setPosition(leftCollectorPower);
+                robot.cubeHolderRight.setPosition(rightCollectorPower);
+            }
 //
             //setting all motor power to 0 if nothing is pressed
             if(gamepad1.right_trigger <= 0 && gamepad1.left_trigger <= 0) {         //DO NOT USE AN ELSE!!!!!!!!!!!!!!!!!
@@ -166,6 +168,10 @@ public class robot8201 extends LinearOpMode {
 
             //Testing messages
 
+            telemetry.addData("rightfront" , rightWheelPowerFront);
+            telemetry.addData("rightback" , rightWheelPowerBack);
+            telemetry.addData("leftfront" , leftWheelPowerFront);
+            telemetry.addData("leftback" , leftWheelPowerBack);
             telemetry.addData("Value of Left Trigger:" , "");
             telemetry.update();
         }
