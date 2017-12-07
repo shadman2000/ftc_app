@@ -37,49 +37,41 @@ public class robot8201 extends LinearOpMode {
         while (opModeIsActive()) {
 
             //Acceleration of both wheels on right trigger
-
+            if(gamepad1.right_trigger > 0) {
                 //Redefining the power of both wheel according to the position of the trigger
-                leftWheelPowerFront = gamepad1.right_stick_y;
-                leftWheelPowerBack = gamepad1.right_stick_y;
-                rightWheelPowerFront = gamepad1.right_stick_y;
-                rightWheelPowerBack = gamepad1.right_stick_y;
+                leftWheelPowerFront = gamepad1.right_trigger;
+                leftWheelPowerBack = gamepad1.right_trigger;
+                rightWheelPowerFront = gamepad1.right_trigger;
+                rightWheelPowerBack = gamepad1.right_trigger;
 
-
-//                //Setting wheelPowers for turning
-//                if (gamepad1.left_stick_x > 0) {
-//                    rightWheelPowerFront *= -1;
-//                    rightWheelPowerBack *= -1;
-//                    leftWheelPowerFront = gamepad1.right_trigger;
-//                    leftWheelPowerBack = gamepad1.right_trigger;
-//                } else if (gamepad1.left_stick_x < 1) {
-//                    leftWheelPowerFront *= -1;
-//                    leftWheelPowerBack *= -1;
-//                    rightWheelPowerFront = gamepad1.right_trigger;
-//                    rightWheelPowerBack = gamepad1.right_trigger;
-//                }
-
+                //Setting wheelPowers for turning
+                if (gamepad1.left_stick_x > 0) {
+                    rightWheelPowerFront = -gamepad1.right_trigger;
+                    rightWheelPowerBack = -gamepad1.right_trigger;
+                } else if (gamepad1.left_stick_x < 0) {
+                    leftWheelPowerFront = -gamepad1.right_trigger;
+                    leftWheelPowerBack = -gamepad1.right_trigger;
+                }
+            }
 
             //Deceleration of both wheels on left trigger
-
+            if(gamepad1.left_trigger > 0) {
                 //Redefining the power of both wheel according to the position of the trigger
-                leftWheelPowerFront = gamepad1.left_stick_y;
-                leftWheelPowerBack = gamepad1.left_stick_y;
-                rightWheelPowerFront = gamepad1.left_stick_y;
-                rightWheelPowerBack = gamepad1.left_stick_y;
+                leftWheelPowerFront = -gamepad1.left_trigger;
+                leftWheelPowerBack = -gamepad1.left_trigger;
+                rightWheelPowerFront = -gamepad1.left_trigger;
+                rightWheelPowerBack = -gamepad1.left_trigger;
 
 
-//                //Setting wheelPowers for turning
-//                if (gamepad1.left_stick_x > 0) {
-//                    rightWheelPowerFront *= -1;
-//                    rightWheelPowerBack *= -1;
-//                    leftWheelPowerFront = gamepad1.left_trigger;
-//                    leftWheelPowerBack = gamepad1.left_trigger;
-//                } else if (gamepad1.left_stick_x < 0) {
-//                    leftWheelPowerFront *= -1;
-//                    leftWheelPowerBack *= -1;
-//                    rightWheelPowerFront = gamepad1.left_trigger;
-//                    rightWheelPowerBack = gamepad1.left_trigger;
-//                }
+                //Setting wheelPowers for turning
+                if (gamepad1.left_stick_x > 0) {
+                    rightWheelPowerFront = gamepad1.left_trigger;
+                    rightWheelPowerBack = gamepad1.left_trigger;
+                } else if (gamepad1.left_stick_x < 0) {
+                    leftWheelPowerFront = gamepad1.left_trigger;
+                    leftWheelPowerBack = gamepad1.left_trigger;
+                }
+            }
 
             //The suck-in wheels
             //Need to be tested which way the wheel rotates
