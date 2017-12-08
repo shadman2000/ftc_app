@@ -132,40 +132,40 @@ public class robot8201 extends LinearOpMode {
 //                robot.gemArm.setPosition(0); //Need to test according to the initial
 //            }
 //
-//            //MUST BE TESTED
-            //The cube collectors
+
+            //The cube collector
+            //Limiting the power(s) of servo
+            if(rightCollectorPower >= 0.75){
+                rightCollectorPower = 0.75;
+            }
+            if(rightCollectorPower <= 0.598){
+                rightCollectorPower = 0.598;
+            }
+            if(leftCollectorPower >= 0.38){
+                leftCollectorPower = 0.38;
+            }
+            if(leftCollectorPower <= 0.165){
+                leftCollectorPower = 0.165;
+            }
+
+            //Gamepad 2 right trigger holder movement
             if(gamepad2.right_trigger > 0){
 
                 //Increasing Servo power
-                rightCollectorPower-=0.05;
-                leftCollectorPower+=0.05;
+                rightCollectorPower-=0.01;
+                leftCollectorPower+=0.01;
 
                   //Limiting the servo power
-//                if(rightCollectorPower >= 1 || leftCollectorPower >= 1){
-//                    rightCollectorPower = 1;
-//                    leftCollectorPower = 1;
-//                }
-                robot.cubeHolderLeft.setPosition(leftCollectorPower);     //NEEDS TO BE TESTED
-                robot.cubeHolderRight.setPosition(rightCollectorPower);     //NEEDS TO BE TESTED
+
+                robot.cubeHolderLeft.setPosition(leftCollectorPower);
+                robot.cubeHolderRight.setPosition(rightCollectorPower);
             }
 
-            if(rightCollectorPower >= 1){
-                rightCollectorPower = 1;
-            }
-            if(rightCollectorPower <= 0){
-                rightCollectorPower = 0;
-            }
-            if(leftCollectorPower >= 1){
-                leftCollectorPower = 1;
-            }
-            if(leftCollectorPower <= 0){
-                leftCollectorPower = 0;
-            }
-
+            //Gamepad 2 left trigger holder movement
             if(gamepad2.left_trigger > 0){
                 //Increasing Servo power
-                rightCollectorPower+=0.05;
-                leftCollectorPower-=0.05;
+                rightCollectorPower+=0.01;
+                leftCollectorPower-=0.01;
 
                //Limiting the servo power
 //                if(rightCollectorPower <= 0.15 || leftCollectorPower <=0.15){
