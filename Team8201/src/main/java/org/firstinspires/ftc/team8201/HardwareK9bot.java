@@ -46,9 +46,9 @@ public class HardwareK9bot
         leftWheelBack.setDirection(DcMotor.Direction.REVERSE);
         
         //Suck-in Wheels
-//        suckInWheeleft  = hwMap.get(DcMotor.class, "suckInLeftWheel");
-//        suckInWheelright = hwMap.get(DcMotor.class, "suckInWheelright");
-//        suckInWheeleft.setDirection(DcMotor.Direction.REVERSE);
+        suckInWheeleft  = hwMap.get(DcMotor.class, "suckInWheelLeft");
+        suckInWheelright = hwMap.get(DcMotor.class, "suckInWheelRight");
+        suckInWheeleft.setDirection(DcMotor.Direction.REVERSE);
 //
 //        //Elevator
 //        elevator  = hwMap.get(DcMotor.class, "elevator");

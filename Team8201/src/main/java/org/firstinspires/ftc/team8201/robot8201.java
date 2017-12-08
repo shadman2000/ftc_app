@@ -76,18 +76,14 @@ public class robot8201 extends LinearOpMode {
             //The suck-in wheels
             //Need to be tested which way the wheel rotates
 
-//            //The wheels of the suck-in will both rotate inwards with right_trigger
-//            if (gamepad2.right_trigger > 0) {
-//
-//                //Redefining the power of both wheel (suck-in) according to the position of the trigger
-//                leftCollectorPower = gamepad2.right_trigger;
-//                rightCollectorPower = gamepad2.right_trigger;
-//
-//                //Setting the range of the motor power
-//                leftCollectorPower = Range.clip(leftCollectorPower, 0.0, 1.0);
-//                rightCollectorPower = Range.clip(rightCollectorPower, 0.0, 1.0);
-//            }
-//
+            //The wheels of the suck-in will both rotate inwards with right_trigger
+            if (gamepad2.a == true) {
+
+                //Redefining the power of both wheel (suck-in) according to the position of the trigger
+                leftCollectorPower = 1.0;
+                rightCollectorPower = 1.0;
+            }
+
 //            //The wheels of the suck-in will both rotate outwards with left_trigger
 //            if (gamepad2.left_trigger > 0) {
 //
