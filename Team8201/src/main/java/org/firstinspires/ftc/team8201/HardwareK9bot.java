@@ -14,7 +14,7 @@ public class HardwareK9bot
     public DcMotor leftWheelFront;
     public DcMotor leftWheelBack;
     public DcMotor suckInWheelright;
-    public DcMotor suckInWheeleft;
+    public DcMotor suckInWheelleft;
     public DcMotor elevator;
     
     //Servo(s)
@@ -46,25 +46,26 @@ public class HardwareK9bot
         leftWheelBack.setDirection(DcMotor.Direction.REVERSE);
         
         //Suck-in Wheels
-        suckInWheeleft  = hwMap.get(DcMotor.class, "suckInWheelLeft");
+        suckInWheelleft  = hwMap.get(DcMotor.class, "suckInWheelLeft");
         suckInWheelright = hwMap.get(DcMotor.class, "suckInWheelRight");
-        suckInWheeleft.setDirection(DcMotor.Direction.REVERSE);
-//
-//        //Elevator
-//        elevator  = hwMap.get(DcMotor.class, "elevator");
-//
-//        //Servo(s)
-//        gemArm = hwMap.get(Servo.class, "gemArm");
+        suckInWheelleft.setDirection(DcMotor.Direction.REVERSE);
+
+        //Elevator
+        elevator  = hwMap.get(DcMotor.class, "elevator");
+
+        //Servo(s)
+        gemArm = hwMap.get(Servo.class, "gemArm");
         cubeHolderLeft = hwMap.get(Servo.class, "leftCubeHolder");
         cubeHolderRight = hwMap.get(Servo.class, "rightCubeHolder");
+
 
         // Set all motors to zero power
         leftWheelFront.setPower(0);
         leftWheelBack.setPower(0);
         rightWheelFront.setPower(0);
         rightWheelBack.setPower(0);
-//        suckInWheeleft.setPower(0);
-//        suckInWheelright.setPower(0);
+        suckInWheelleft.setPower(0);
+        suckInWheelright.setPower(0);
 //        elevator.setPower(0);
         
         //Servo(s)
@@ -79,8 +80,8 @@ public class HardwareK9bot
         leftWheelBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightWheelFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightWheelBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        suckInWheeleft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        suckInWheelright.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        suckInWheelleft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        suckInWheelright.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }

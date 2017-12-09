@@ -18,9 +18,16 @@ public class robot8201 extends LinearOpMode {
         double leftWheelPowerBack = 0.0;
         double rightWheelPowerFront = 0.0;
         double rightWheelPowerBack = 0.0;
+        double suckInWheelRight = 0.0;
+        double suckInWheelLeft = 0.0;
+        double elevatorPower = 0.0;
+        int elevator_tracker = 0;
+
+        //servo(s)
         double rightCollectorPower = 0.0;
         double leftCollectorPower = 0.0;
-        double elevatorPower = 0.0;
+        double gemArm;
+
         
         //Initializing the hardwareK9bot file
         robot.init(hardwareMap);
@@ -75,48 +82,52 @@ public class robot8201 extends LinearOpMode {
 
             //The suck-in wheels
             //Need to be tested which way the wheel rotates
-
-            //The wheels of the suck-in will both rotate inwards with right_trigger
-            if (gamepad2.a == true) {
+            if(gamepad2.right_trigger > 0){
 
                 //Redefining the power of both wheel (suck-in) according to the position of the trigger
-                leftCollectorPower = 1.0;
-                rightCollectorPower = 1.0;
+                suckInWheelLeft = gamepad2.right_trigger;
+                suckInWheelRight = gamepad2.right_trigger;
+
             }
 
-//            //The wheels of the suck-in will both rotate outwards with left_trigger
-//            if (gamepad2.left_trigger > 0) {
-//
-//                //Redefining the power of both wheel (suck-in) according to the position of the trigger
-//                leftCollectorPower = gamepad2.right_trigger;
-//                rightCollectorPower = gamepad2.right_trigger;
-//
-//                //Setting the range of the motor power
-//                leftCollectorPower = Range.clip(leftCollectorPower, 0.0, -1.0);
-//                rightCollectorPower = Range.clip(rightCollectorPower, 0.0, -1.0);
-//            }
-//
-//            //The elevator
-//            //Need to be tested which way the wheel rotates
-//
-//            //The motors will go both up and down according to the y_axis of gamepad2 rightstick
-//            if (gamepad2.right_stick_y > 0) {
-//
-//                //Motor power goes up so as the elevator
-//                elevatorPower = gamepad2.right_stick_y;
-//
-//                //Ranging the right stick power
-//                elevatorPower = Range.clip(elevatorPower, 0.0, 1.0);
-//            }
-//            if (gamepad2.right_stick_y < 0) {
-//
-//                //Motor power goes up so as the elevator
-//                elevatorPower = gamepad2.right_stick_y;
-//
-//                //Ranging the right stick power
-//                elevatorPower = Range.clip(elevatorPower, 0.0, -1.0);
-//            }
-//
+            //The wheels of the suck-in will both rotate outwards with left_trigger
+            if (gamepad2.left_trigger > 0) {
+
+                //Redefining the power of both wheel (suck-in) according to the position of the trigger
+                suckInWheelLeft = -gamepad2.left_trigger;
+                suckInWheelRight = -gamepad2.left_trigger;
+            }
+
+            //Stopping the wheel when none is pressed
+            if(gamepad2.left_trigger <= 0 && gamepad2.right_trigger <= 0){
+                suckInWheelLeft = 0;
+                suckInWheelRight = 0;
+            }
+
+            //The elevator
+            //Need to be tested which way the wheel rotates
+
+            //The motors will go both up and down according to the y_axis of gamepad2 rightstick
+            if (gamepad2.right_stick_y > 0) {
+                //Motor power goes up so as the elevator
+                elevatorPower = gamepad2.right_stick_y;
+                elevator_tracker += 1;
+            }
+
+            //Down goes elevator
+            if (gamepad2.right_stick_y < 0) {
+                //Motor power goes up so as the elevator
+                elevatorPower = gamepad2.right_stick_y;
+                elevator_tracker -= 1;
+
+            }
+
+            //stop it when it's 0
+            if(gamepad2.right_stick_y == 0){
+                elevatorPower = 0;
+            }
+
+
 //            //The gem arm
 //            //drop
 //            if(gamepad2.dpad_down){
@@ -145,11 +156,11 @@ public class robot8201 extends LinearOpMode {
             }
 
             //Gamepad 2 right trigger holder movement
-            if(gamepad2.right_trigger > 0){
+            if(gamepad2.right_bumper){
 
                 //Increasing Servo power
-                rightCollectorPower-=0.01;
-                leftCollectorPower+=0.01;
+                rightCollectorPower-=0.1;
+                leftCollectorPower+=0.1;
 
                   //Limiting the servo power
 
@@ -158,10 +169,10 @@ public class robot8201 extends LinearOpMode {
             }
 
             //Gamepad 2 left trigger holder movement
-            if(gamepad2.left_trigger > 0){
+            if(gamepad2.left_bumper){
                 //Increasing Servo power
-                rightCollectorPower+=0.01;
-                leftCollectorPower-=0.01;
+                rightCollectorPower+=0.1;
+                leftCollectorPower-=0.1;
 
                //Limiting the servo power
 //                if(rightCollectorPower <= 0.15 || leftCollectorPower <=0.15){
@@ -178,9 +189,6 @@ public class robot8201 extends LinearOpMode {
                 rightWheelPowerBack = 0;
                 leftWheelPowerFront = 0;
                 leftWheelPowerBack = 0;
- //               leftCollectorPower = 0;
-//                rightCollectorPower = 0;
-                //Need to test if elevator needed to be set to zero
             }
 
             //Sending the powers as motor Power
@@ -189,15 +197,17 @@ public class robot8201 extends LinearOpMode {
             robot.leftWheelBack.setPower(leftWheelPowerBack);
             robot.rightWheelBack.setPower(rightWheelPowerFront);
             robot.rightWheelFront.setPower(rightWheelPowerBack);
-//            robot.suckInWheeleft.setPower(leftCollectorPower);
-//            robot.suckInWheelright.setPower(rightCollectorPower);
-//            robot.elevator.setPower(elevatorPower);
+            robot.suckInWheelleft.setPower(suckInWheelLeft);
+            robot.suckInWheelright.setPower(suckInWheelRight);
+            robot.elevator.setPower(elevatorPower);
 
             //Testing messages
 
             telemetry.addData("leftServo" , leftCollectorPower);
             telemetry.addData("rightServo" , rightCollectorPower);
-            telemetry.addData("Value of Left Trigger:" , "");
+            telemetry.addData("Left Collector Wheel" , leftCollectorPower);
+            telemetry.addData("right Collector Wheel" , rightCollectorPower);
+            telemetry.addData("elevator Tracker" , elevator_tracker);
             telemetry.update();
         }
     }
