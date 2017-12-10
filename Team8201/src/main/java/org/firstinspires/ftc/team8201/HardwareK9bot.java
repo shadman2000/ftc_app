@@ -22,7 +22,6 @@ public class HardwareK9bot
     public Servo cubeHolderLeft;
     public Servo cubeHolderRight;
 
-
     /* Local OpMode members. */
     HardwareMap hwMap  = null;
     private ElapsedTime period  = new ElapsedTime();
@@ -54,10 +53,9 @@ public class HardwareK9bot
         elevator  = hwMap.get(DcMotor.class, "elevator");
 
         //Servo(s)
-        gemArm = hwMap.get(Servo.class, "gemArm");
+//        gemArm = hwMap.get(Servo.class, "gemArm");
         cubeHolderLeft = hwMap.get(Servo.class, "leftCubeHolder");
         cubeHolderRight = hwMap.get(Servo.class, "rightCubeHolder");
-
 
         // Set all motors to zero power
         leftWheelFront.setPower(0);
