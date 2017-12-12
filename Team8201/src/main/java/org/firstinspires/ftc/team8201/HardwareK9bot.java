@@ -51,9 +51,10 @@ public class HardwareK9bot
 
         //Elevator
         elevator  = hwMap.get(DcMotor.class, "elevator");
+        elevator.setDirection(DcMotor.Direction.REVERSE);
 
         //Servo(s)
-//        gemArm = hwMap.get(Servo.class, "gemArm");
+        gemArm = hwMap.get(Servo.class, "gemArm");
         cubeHolderLeft = hwMap.get(Servo.class, "leftCubeHolder");
         cubeHolderRight = hwMap.get(Servo.class, "rightCubeHolder");
 
@@ -64,12 +65,12 @@ public class HardwareK9bot
         rightWheelBack.setPower(0);
         suckInWheelleft.setPower(0);
         suckInWheelright.setPower(0);
-//        elevator.setPower(0);
+        elevator.setPower(0);
         
         //Servo(s)
-//        gemArm.setPosition(0);              //Needs to be tested
-        cubeHolderLeft.setPosition(0.165);   //Needs to be tested
-        cubeHolderRight.setPosition(0.75);   //Needs to be tested
+        gemArm.setPosition(0.3);              //Needs to be tested
+        cubeHolderLeft.setPosition(0.12);   //Needs to be tested
+        cubeHolderRight.setPosition(0.77);   //Needs to be tested
 
 
         // Set all motors to run without encoders.

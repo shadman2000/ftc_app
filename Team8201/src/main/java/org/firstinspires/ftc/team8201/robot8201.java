@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.team8201;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 @TeleOp(name = "robot8201", group = "Testing")
 public class robot8201 extends LinearOpMode {
@@ -25,16 +25,17 @@ public class robot8201 extends LinearOpMode {
         //servo(s)
         double rightCollectorPower = 0.0;
         double leftCollectorPower = 0.0;
-        double gemArm;
 
         //Initializing the hardwareK9bot file
         robot.init(hardwareMap);
 
         //Sensor(s)
-        DigitalChannel digitalTouch;
-        digitalTouch = hardwareMap.get(DigitalChannel.class, "groundTouch");
-        // set the digital channel to input.
-        digitalTouch.setMode(DigitalChannel.Mode.INPUT);
+        TouchSensor groundTouch;
+        TouchSensor cubeTouch;
+        cubeTouch = hardwareMap.get(TouchSensor.class,"cubeTouch");
+        groundTouch = hardwareMap.get(TouchSensor.class, "groundTouch");
+
+
 
         //Ready message
         telemetry.addData("Say ", "8201 robot is ready");
@@ -107,54 +108,43 @@ public class robot8201 extends LinearOpMode {
             }
 
             //The elevator
-            //Need to be tested which way the wheel rotates
             //The motors will go both up and down according to the y_axis of gamepad2 rightstick
-            if (gamepad2.right_stick_y > 0) {
-                //Motor power goes up so as the elevator
-                elevatorPower = gamepad2.right_stick_y;
-            }
-            //Down goes elevator
-            if (gamepad2.right_stick_y < 0) {
-                //Motor power goes up so as the elevator
-                elevatorPower = gamepad2.right_stick_y;
-
-            }
-            //stop it when it's 0
-            if(gamepad2.right_stick_y == 0) {
+            //Motor power goes up so as the elevator
+            elevatorPower = -gamepad2.right_stick_y;
+            //Stoping the elevator when touches the ground
+            if (groundTouch.isPressed() == true && elevatorPower < 0) {
                 elevatorPower = 0;
             }
-            //Stop also when ground touch sensor is activated
-            if (digitalTouch.getState() == true && gamepad2.right_stick_y < 0) {
+            //Stopping the elevator when a cube is touched
+            if(cubeTouch.isPressed() == true && elevatorPower < 0){
                 elevatorPower = 0;
             }
 
+            //The gem arm
+            //drop
+            if(gamepad2.dpad_down){
+                robot.gemArm.setPosition(0.8); //Need to test accoring to the initial
+            }
+            //up
+            if(gamepad2.dpad_up){
+                robot.gemArm.setPosition(0.3); //Need to test according to the initial
+            }
 
-//            //The gem arm
-//            //drop
-//            if(gamepad2.dpad_down){
-//                robot.gemArm.setPosition(1); //Need to test accoring to the initial
-//            }
-//
-//            //up
-//            if(gamepad2.dpad_up){
-//                robot.gemArm.setPosition(0); //Need to test according to the initial
-//            }
-//
 
             //The cube collector
             //Limiting the power(s) of servo
             //TESTED
-            if(rightCollectorPower >= 0.75){
-                rightCollectorPower = 0.75;
+            if(rightCollectorPower >= 0.77){
+                rightCollectorPower = 0.77;
             }
-            if(rightCollectorPower <= 0.598){
-                rightCollectorPower = 0.598;
+            if(rightCollectorPower <= 0.56){
+                rightCollectorPower = 0.56;
             }
-            if(leftCollectorPower >= 0.38){
-                leftCollectorPower = 0.38;
+            if(leftCollectorPower >= 0.41){
+                 leftCollectorPower = 0.41;
             }
-            if(leftCollectorPower <= 0.165){
-                leftCollectorPower = 0.165;
+            if(leftCollectorPower <= 0.12){
+                leftCollectorPower = 0.12;
             }
             //Gamepad 2 right bumper holder movement
             if(gamepad2.right_bumper){
@@ -189,6 +179,8 @@ public class robot8201 extends LinearOpMode {
             telemetry.addData("rightServo" , rightCollectorPower);
             telemetry.addData("Left Collector Wheel" , leftCollectorPower);
             telemetry.addData("right Collector Wheel" , rightCollectorPower);
+            telemetry.addData("elevator" , elevatorPower);
+            telemetry.addData("groundTouch" , groundTouch.isPressed());
             telemetry.update();
         }
     }
