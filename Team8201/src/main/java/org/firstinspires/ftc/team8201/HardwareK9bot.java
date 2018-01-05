@@ -69,15 +69,15 @@ public class HardwareK9bot
         
         //Servo(s)
         gemArm.setPosition(0.3);              //Needs to be tested
-        cubeHolderLeft.setPosition(0.12);   //Needs to be tested
-        cubeHolderRight.setPosition(0.77);   //Needs to be tested
+        cubeHolderLeft.setPosition(0.57);   //Needs to be tested
+        cubeHolderRight.setPosition(0.46);   //Needs to be tested
 
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
-        leftWheelFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftWheelFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftWheelBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightWheelFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightWheelFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightWheelBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         suckInWheelleft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

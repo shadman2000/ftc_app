@@ -184,23 +184,23 @@ public class robot8201 extends LinearOpMode {
             //The cube collector
             //Limiting the power(s) of servo
             //TESTED
-            if(rightCollectorPower >= 0.77){
-                rightCollectorPower = 0.77;
+            if(rightCollectorPower >= 0.46){
+                rightCollectorPower = 0.46;
             }
-            if(rightCollectorPower <= 0.56){
-                rightCollectorPower = 0.56;
+            if(rightCollectorPower <= 0.29){
+                rightCollectorPower = 0.29;
             }
-            if(leftCollectorPower >= 0.41){
-                 leftCollectorPower = 0.41;
+            if(leftCollectorPower >= 0.79){
+                 leftCollectorPower = 0.79;
             }
-            if(leftCollectorPower <= 0.12){
-                leftCollectorPower = 0.12;
+            if(leftCollectorPower <= 0.57){
+                leftCollectorPower = 0.57;
             }
             //Gamepad 2 right bumper holder movement
             if(gamepad2.right_bumper){
                 //Increasing Servo power
-                rightCollectorPower-=0.1;
-                leftCollectorPower+=0.1;
+                rightCollectorPower-=0.01;
+                leftCollectorPower+=0.01;
                 //Sending the powers to the servo
                 robot.cubeHolderLeft.setPosition(leftCollectorPower);
                 robot.cubeHolderRight.setPosition(rightCollectorPower);
@@ -208,8 +208,8 @@ public class robot8201 extends LinearOpMode {
             //Gamepad 2 left bumper holder movement
             if(gamepad2.left_bumper){
                 //Increasing Servo power
-                rightCollectorPower+=0.1;
-                leftCollectorPower-=0.1;
+                rightCollectorPower+=0.01;
+                leftCollectorPower-=0.01;
                 //Sending the powers to the servo
                 robot.cubeHolderLeft.setPosition(leftCollectorPower);
                 robot.cubeHolderRight.setPosition(rightCollectorPower);
