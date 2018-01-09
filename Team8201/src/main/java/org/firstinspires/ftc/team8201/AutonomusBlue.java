@@ -11,7 +11,7 @@ public class AutonomusBlue extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
     //Start declaring the variables
-    static final double COUNTS_PER_MOTOR_REV = 280;    // eg: TETRIX Motor Encoder
+    static final double COUNTS_PER_MOTOR_REV = 280;     //The Motor we have Encoder
     static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
     static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
@@ -20,13 +20,12 @@ public class AutonomusBlue extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        encoderDrive(DRIVE_SPEED, 10.0, 10.0, 5.0);
-        encoderTurn(90);
+        encoderDrive(DRIVE_SPEED, 10.0, 10.0, 5.0);     //Just to test if it goes straight
+        encoderTurn(90);                                                     //Calling the turn function
     }
 
-    public void encoderDrive(double speed,
-                              double leftInches, double rightInches,
-                              double timeoutS){
+    public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS){
+
         int newLeftTarget;
         int newRightTarget;
 
@@ -48,12 +47,6 @@ public class AutonomusBlue extends LinearOpMode {
             robot.leftWheelFront.setPower(Math.abs(speed));
             robot.rightWheelFront.setPower(Math.abs(speed));
 
-            // keep looping while we are still active, and there is time left, and both motors are running.
-            // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
-            // its target position, the motion will stop.  This is "safer" in the event that the robot will
-            // always end the motion as soon as possible.
-            // However, if you require that BOTH motors have finished their moves before the robot continues
-            // onto the next step, use (isBusy() || isBusy()) in the loop test.
             while (opModeIsActive() &&
                     (runtime.seconds() < timeoutS) &&
                     (robot.leftWheelFront.isBusy() && robot.rightWheelFront.isBusy())) {
@@ -71,7 +64,7 @@ public class AutonomusBlue extends LinearOpMode {
 
     public void encoderTurn(double degrees) {
         double circumference = 54.0;
-        double arc = circumference * (degrees / 360);
+        double arc = circumference * (degrees / 360);           //Formula that get's the turn inches
         encoderDrive(TURN_SPEED, arc, -arc, 5.0);
     }
 }
