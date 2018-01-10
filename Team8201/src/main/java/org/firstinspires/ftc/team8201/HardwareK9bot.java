@@ -21,6 +21,8 @@ public class HardwareK9bot
     public Servo gemArm;
     public Servo cubeHolderLeft;
     public Servo cubeHolderRight;
+    public Servo rightPservo;
+    public Servo leftPservo;
 
     /* Local OpMode members. */
     HardwareMap hwMap  = null;
@@ -57,6 +59,8 @@ public class HardwareK9bot
         gemArm = hwMap.get(Servo.class, "gemArm");
         cubeHolderLeft = hwMap.get(Servo.class, "leftCubeHolder");
         cubeHolderRight = hwMap.get(Servo.class, "rightCubeHolder");
+        rightPservo = hwMap.get(Servo.class, "rps");
+        leftPservo = hwMap.get(Servo.class, "lps");
 
         // Set all motors to zero power
         leftWheelFront.setPower(0);
@@ -71,7 +75,8 @@ public class HardwareK9bot
         gemArm.setPosition(0.3);              //Needs to be tested
         cubeHolderLeft.setPosition(0.57);   //Needs to be tested
         cubeHolderRight.setPosition(0.46);   //Needs to be tested
-
+        rightPservo.setPosition(0.0);
+        leftPservo.setPosition(0.0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
