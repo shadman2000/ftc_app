@@ -1,20 +1,12 @@
 package org.firstinspires.ftc.team8201;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
-import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
-import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
-import org.firstinspires.ftc.robotcore.external.navigation.VuMarkInstanceId;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 @Autonomous(name="Concept: VuMark Id", group ="Concept")
@@ -31,7 +23,7 @@ public class vuforiaTest extends LinearOpMode {
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
         //License key
-        parameters.vuforiaLicenseKey = "ATsODcD/////AAAAAVw2lR...d45oGpdljdOh5LuFB9nDNfckoxb8COxKSFX";
+        parameters.vuforiaLicenseKey = "AZ+6D5b/////AAAAmRQUk+S030qIoZLhZWPOrbZbzraKFy6NtOgGzvfQKxoBjqGiTiEJDTlDv8gK/EKuq7CP2U0tGXDtroZoWs7PgAZii969frlDaJBpox50Kizzy7CxuUwz1mOA+yf3VfwRRkc+srynTpahWnDGYAuZSTZfCYy2wcpAVAb20J1/kE4z6BL/eAXHHu94ER2jASSGBgeSR01+73BW6G3JEEw9SpluEMNRdJgnMlLwcGLyaO/zuhkfTZOqdffWYsnb2dcbVETTJtVI7EmvLWcoreFhpIwHjEJX0yZiCvw5+MxzRlDVoqIKJoy8hJPDV2Hh6/A1j5mA7IiqssiKjnt3kPfgTGCWH3Eu0vnhE8jWTolJ68JR";
 
         //Use the back camera
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;

@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "Blue", group = "Autonomous")
-public class AutonomusBlue extends LinearOpMode {
+@Autonomous(name = "RedFront", group = "Autonomous")
+public class AutonomusRedFront extends LinearOpMode {
     HardwareK9bot robot = new HardwareK9bot();
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -20,8 +20,27 @@ public class AutonomusBlue extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        robot.init(hardwareMap);
+
+        // Reset encoders
+        stopAndResetEncoders();
+
+        // Wait for "PLAY"
+        waitForStart();
+
         encoderDrive(DRIVE_SPEED, 10.0, 10.0, 5.0);     //Just to test if it goes straight
         encoderTurn(90);                                                     //Calling the turn function
+    }
+
+    // Reset encoders and kill motors
+    public void stopAndResetEncoders() {
+        robot.leftWheelFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightWheelFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        sleep(50); // Wait 50ms to make sure it fully processes
+
+        robot.leftWheelFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightWheelFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS){

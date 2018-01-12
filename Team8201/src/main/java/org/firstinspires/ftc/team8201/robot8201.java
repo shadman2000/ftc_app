@@ -227,15 +227,15 @@ public class robot8201 extends LinearOpMode {
             }
 
             //The platform
-            if(gamepad1.dpad_down == true){
-                leftPlatform = 1.0;
-                rightPlatform = 1.0;
-            }
-
-            if(gamepad1.dpad_up == true){
-                leftPlatform = 0.0;
-                rightPlatform = 0.0;
-            }
+//            if(gamepad1.dpad_down == true){
+//                leftPlatform = 1.0;
+//                rightPlatform = 1.0;
+//            }
+//
+//            if(gamepad1.dpad_up == true){
+//                leftPlatform = 0.0;
+//                rightPlatform = 0.0;
+//            }
 
             //Sending the powers as motor Power
             robot.leftWheelFront.setPower(leftWheelPowerFront * 0.6);
@@ -243,8 +243,9 @@ public class robot8201 extends LinearOpMode {
             robot.rightWheelBack.setPower(rightWheelPowerFront * 0.6);
             robot.rightWheelFront.setPower(rightWheelPowerBack * 0.6);
             robot.suckInWheelleft.setPower(suckInWheelLeft);
-            robot.leftPservo.setPosition(leftPlatform);
-            robot.rightPservo.setPosition(rightPlatform);
+            robot.suckInWheelright.setPower(suckInWheelRight);
+//            robot.leftPservo.setPosition(leftPlatform);
+//            robot.rightPservo.setPosition(rightPlatform);
             robot.elevator.setPower(elevatorPower * 0.3);
 
             //Testing messages
