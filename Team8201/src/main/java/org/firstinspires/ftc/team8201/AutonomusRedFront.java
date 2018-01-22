@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "RedFront", group = "Autonomous")
+@Autonomous(name = "FrontEncoder", group = "Autonomous")
 public class AutonomusRedFront extends LinearOpMode {
     HardwareK9bot robot = new HardwareK9bot();
     private ElapsedTime runtime = new ElapsedTime();
@@ -28,19 +28,30 @@ public class AutonomusRedFront extends LinearOpMode {
         // Wait for "PLAY"
         waitForStart();
 
-        encoderDrive(DRIVE_SPEED, 10.0, 10.0, 5.0);     //Just to test if it goes straight
-        encoderTurn(90);                                                     //Calling the turn function
+        encoderDrive(DRIVE_SPEED, -15.0, -15.0, 5.0);     //Just to test if it goes straight
+        sleep(2000);
+        robot.cubeHolderLeft.setPosition(0.79);
+        robot.cubeHolderRight.setPosition(0.29);
+        sleep(2000);
+        encoderDrive(DRIVE_SPEED, 5.0, 5.0, 5.0);     //Calling the turn function
+        sleep(2000);
+        encoderDrive(DRIVE_SPEED, -5.0, -5.0, 5.0);     //Calling the turn function
     }
 
     // Reset encoders and kill motors
     public void stopAndResetEncoders() {
         robot.leftWheelFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightWheelFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftWheelBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightWheelBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         sleep(50); // Wait 50ms to make sure it fully processes
 
         robot.leftWheelFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightWheelFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftWheelBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightWheelBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
     }
 
     public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS){
@@ -56,15 +67,22 @@ public class AutonomusRedFront extends LinearOpMode {
             newRightTarget = robot.rightWheelBack.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
             robot.leftWheelFront.setTargetPosition(newLeftTarget);
             robot.rightWheelFront.setTargetPosition(newRightTarget);
+            robot.leftWheelBack.setTargetPosition(newLeftTarget);
+            robot.rightWheelBack.setTargetPosition(newRightTarget);
+
 
             // Turn On RUN_TO_POSITION
             robot.leftWheelFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.rightWheelFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.leftWheelBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.rightWheelBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             // reset the timeout time and start motion.
             runtime.reset();
             robot.leftWheelFront.setPower(Math.abs(speed));
             robot.rightWheelFront.setPower(Math.abs(speed));
+            robot.leftWheelBack.setPower(Math.abs(speed));
+            robot.rightWheelBack.setPower(Math.abs(speed));
 
             while (opModeIsActive() &&
                     (runtime.seconds() < timeoutS) &&

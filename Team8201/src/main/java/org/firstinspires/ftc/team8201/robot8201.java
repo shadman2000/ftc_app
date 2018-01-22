@@ -26,7 +26,7 @@ public class robot8201 extends LinearOpMode {
         double rightCollectorPower = 0.0;
         double leftCollectorPower = 0.0;
         double leftPlatform = 0.0;
-        double rightPlatform = 0.0;
+        double rightPlatform = 1.0;
 
         //Initializing the hardwareK9bot file
         robot.init(hardwareMap);
@@ -195,23 +195,23 @@ public class robot8201 extends LinearOpMode {
             //The cube collector
             //Limiting the power(s) of servo
             //TESTED
-            if(rightCollectorPower >= 0.46){
-                rightCollectorPower = 0.46;
+            if(rightCollectorPower >= 0.38){
+                rightCollectorPower = 0.38;
             }
-            if(rightCollectorPower <= 0.29){
-                rightCollectorPower = 0.29;
+            if(rightCollectorPower <= 0.15){
+                rightCollectorPower = 0.30;
             }
-            if(leftCollectorPower >= 0.79){
-                 leftCollectorPower = 0.79;
+            if(leftCollectorPower >= 0.15){
+                 leftCollectorPower = 0.51;
             }
-            if(leftCollectorPower <= 0.57){
-                leftCollectorPower = 0.57;
+            if(leftCollectorPower <= 0.36){
+                leftCollectorPower = 0.36;
             }
             //Gamepad 2 right bumper holder movement
             if(gamepad2.right_bumper){
                 //Increasing Servo power
-                rightCollectorPower-=0.1;
-                leftCollectorPower+=0.1;
+                rightCollectorPower-=0.1;                 //Right from the front
+                leftCollectorPower+=0.1;                   //Left from the front
                 //Sending the powers to the servo
                 robot.cubeHolderLeft.setPosition(leftCollectorPower);
                 robot.cubeHolderRight.setPosition(rightCollectorPower);
@@ -227,15 +227,15 @@ public class robot8201 extends LinearOpMode {
             }
 
             //The platform
-//            if(gamepad1.dpad_down == true){
-//                leftPlatform = 1.0;
-//                rightPlatform = 1.0;
-//            }
-//
-//            if(gamepad1.dpad_up == true){
-//                leftPlatform = 0.0;
-//                rightPlatform = 0.0;
-//            }
+            if(gamepad1.dpad_down == true){
+                leftPlatform = 1.0;
+                rightPlatform = 0.0;
+            }
+
+            if(gamepad1.dpad_up == true){
+                leftPlatform = 0.0;
+                rightPlatform = 1.0;
+            }
 
             //Sending the powers as motor Power
             robot.leftWheelFront.setPower(leftWheelPowerFront * 0.6);
@@ -244,8 +244,8 @@ public class robot8201 extends LinearOpMode {
             robot.rightWheelFront.setPower(rightWheelPowerBack * 0.6);
             robot.suckInWheelleft.setPower(suckInWheelLeft);
             robot.suckInWheelright.setPower(suckInWheelRight);
-//            robot.leftPservo.setPosition(leftPlatform);
-//            robot.rightPservo.setPosition(rightPlatform);
+            robot.leftPservo.setPosition(leftPlatform);
+            robot.rightPservo.setPosition(rightPlatform);
             robot.elevator.setPower(elevatorPower * 0.3);
 
             //Testing messages
