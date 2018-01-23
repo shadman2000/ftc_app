@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.team8201.testBot;
+package org.firstinspires.ftc.team8201;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 
-@Autonomous(name = "clrsensorTest", group = "Sensor")
+@Autonomous(name = "adatest", group = "Sensor")
 
 public class cstest extends LinearOpMode {
 
@@ -49,6 +49,7 @@ public class cstest extends LinearOpMode {
             telemetry.addData("Green", sensorRGB.green());
             telemetry.addData("Blue ", sensorRGB.blue());
             telemetry.addData("Hue", hsvValues[0]);
+            telemetry.update();
 
         }
 
