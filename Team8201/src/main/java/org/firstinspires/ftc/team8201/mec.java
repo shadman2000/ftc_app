@@ -3,7 +3,7 @@ package org.firstinspires.ftc.team8201;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name = "robot8201", group = "Testing")
+@TeleOp(name = "mecTest", group = "Testing")
 public class mec extends LinearOpMode {
 
     //Creating an instance of HardwareK9bot as "robot"
