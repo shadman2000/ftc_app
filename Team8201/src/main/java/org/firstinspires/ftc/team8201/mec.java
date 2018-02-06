@@ -35,54 +35,54 @@ public class mec extends LinearOpMode {
             //Forward and turn
             if(gamepad1.right_trigger > 0) {
                 //Redefining the power of both wheel according to the position of the trigger
-                leftWheelPowerFront = -gamepad1.right_trigger;
-                leftWheelPowerBack = -gamepad1.right_trigger;
-                rightWheelPowerFront = -gamepad1.right_trigger;
-                rightWheelPowerBack = -gamepad1.right_trigger;
+                leftWheelPowerFront = gamepad1.right_trigger;
+                leftWheelPowerBack = gamepad1.right_trigger;
+                rightWheelPowerFront = gamepad1.right_trigger;
+                rightWheelPowerBack = gamepad1.right_trigger;
                 //Setting wheelPowers for turning
                 if (gamepad1.left_stick_x > 0) {
-                    rightWheelPowerFront = gamepad1.right_trigger;
-                    rightWheelPowerBack = gamepad1.right_trigger;
+                    rightWheelPowerFront = -gamepad1.right_trigger;
+                    rightWheelPowerBack = -gamepad1.right_trigger;
                 }
                 if (gamepad1.left_stick_x < 0) {
-                    leftWheelPowerFront = gamepad1.right_trigger;
-                    rightWheelPowerBack = gamepad1.right_trigger;
+                    leftWheelPowerFront = -gamepad1.right_trigger;
+                    leftWheelPowerBack = -gamepad1.right_trigger;
                 }
 
             }
             //Backward and turn
             if(gamepad1.left_trigger > 0){
                 //Redefining the power of both wheel according to the position of the trigger
-                rightWheelPowerBack = gamepad1.left_trigger;
-                rightWheelPowerFront = gamepad1.left_trigger;
-                leftWheelPowerBack = gamepad1.left_trigger;
-                leftWheelPowerFront = gamepad1.left_trigger;
+                rightWheelPowerBack = -gamepad1.left_trigger;
+                rightWheelPowerFront = -gamepad1.left_trigger;
+                leftWheelPowerBack = -gamepad1.left_trigger;
+                leftWheelPowerFront = -gamepad1.left_trigger;
                 //Setting wheelPowers for turning
                 if(gamepad1.left_stick_x > 0){
-                    rightWheelPowerFront = -gamepad1.left_trigger;
-                    rightWheelPowerBack = -gamepad1.right_trigger;
+                    rightWheelPowerFront = gamepad1.left_trigger;
+                    rightWheelPowerBack = gamepad1.left_trigger;
                 }
-                if(gamepad1.right_stick_x < 0){
-                    leftWheelPowerBack = -gamepad1.left_trigger;
-                    rightWheelPowerFront = -gamepad1.left_trigger;
+                if(gamepad1.left_stick_x < 0){
+                    leftWheelPowerFront = gamepad1.left_trigger;
+                    leftWheelPowerBack = gamepad1.left_trigger;
                 }
             }
             //Going right
             if(gamepad1.right_stick_x > 0){
-                rightWheelPowerFront = -gamepad1.right_stick_x;
-                rightWheelPowerBack = gamepad1.right_stick_x;
+                rightWheelPowerFront = gamepad1.right_stick_x;
+                rightWheelPowerBack = -gamepad1.right_stick_x;
                 leftWheelPowerFront = gamepad1.right_stick_x;
                 leftWheelPowerBack = -gamepad1.right_stick_x;
             }
             //Going Left
             if(gamepad1.right_stick_x < 0){
-                leftWheelPowerBack = gamepad1.right_stick_x;
-                leftWheelPowerFront = -gamepad1.right_stick_x;
+                leftWheelPowerBack = -gamepad1.right_stick_x;
+                leftWheelPowerFront = gamepad1.right_stick_x;
                 rightWheelPowerFront = gamepad1.right_stick_x;
                 rightWheelPowerBack = -gamepad1.right_stick_x;
             }
             //setting all motor (driving wheel) power to 0 if nothing is pressed
-            if(gamepad1.right_trigger <= 0 && gamepad1.left_trigger <= 0) {         //DO NOT USE AN ELSE!!!!!!!!!!!!!!!!!
+            if(gamepad1.right_trigger <= 0 && gamepad1.left_trigger <= 0 && gamepad1.right_stick_x == 0) {         //DO NOT USE AN ELSE!!!!!!!!!!!!!!!!!
                 rightWheelPowerFront = 0;
                 rightWheelPowerBack = 0;
                 leftWheelPowerFront = 0;
@@ -94,12 +94,12 @@ public class mec extends LinearOpMode {
             robot.rightWheelBack.setPower(rightWheelPowerFront);
             robot.rightWheelFront.setPower(rightWheelPowerBack);
 
-             //Testing messages
-             telemetry.addData("leftWheelPowerFront" , leftWheelPowerFront);
-             telemetry.addData("leftWheelPowerBack" , leftWheelPowerBack);
-             telemetry.addData("rightWheelPowerFront" , rightWheelPowerFront);
-             telemetry.addData("rightWheelPowerBack" , rightWheelPowerBack);
-             telemetry.update();
+            //Testing messages
+            telemetry.addData("leftWheelPowerFront" , leftWheelPowerFront);
+            telemetry.addData("leftWheelPowerBack" , leftWheelPowerBack);
+            telemetry.addData("rightWheelPowerFront" , rightWheelPowerFront);
+            telemetry.addData("rightWheelPowerBack" , rightWheelPowerBack);
+            telemetry.update();
         }
     }
 }
