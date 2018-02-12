@@ -29,13 +29,14 @@ public class mecAutoFront extends LinearOpMode {
         waitForStart();
 
         //Testing
-        encoderDrive(DRIVE_SPEED, 10.0, 10.0, 10.0,10.0,3);
-        sleep(2000);
-        encoderTurn(90);
-        sleep(2000);
-        encoderMoveLeft(10.0);
-        sleep(2000);
-        encoderMoveRight(10.0);
+        encoderDrive(DRIVE_SPEED, 50.0, 50.0, 50.0, 50.0, 3);
+        robot.rightWheelBack.setPower(0.0);
+        // sleep(2000);
+        // encoderTurn(90);
+        // sleep(2000);
+        // encoderMoveLeft(10.0);
+        // sleep(2000);
+        // encoderMoveRight(10.0);
     }
 
     // Reset encoders and kill motors
@@ -68,7 +69,7 @@ public class mecAutoFront extends LinearOpMode {
             newLeftFront = robot.leftWheelFront.getCurrentPosition() + (int) (leftFrontInches * COUNTS_PER_INCH);
             newRightFront = robot.rightWheelFront.getCurrentPosition() + (int) (rightFrontInches * COUNTS_PER_INCH);
             newLeftBack = robot.leftWheelBack.getCurrentPosition() + (int) (leftBackInches * COUNTS_PER_INCH);
-            newRightBack = robot.leftWheelBack.getCurrentPosition() + (int) (rightBackInches * COUNTS_PER_INCH);
+            newRightBack = robot.rightWheelBack.getCurrentPosition() + (int) (rightBackInches * COUNTS_PER_INCH);
             robot.leftWheelFront.setTargetPosition(newLeftFront);
             robot.rightWheelFront.setTargetPosition(newRightFront);
             robot.leftWheelBack.setTargetPosition(newLeftBack);
@@ -93,7 +94,7 @@ public class mecAutoFront extends LinearOpMode {
                     (robot.leftWheelFront.isBusy() && robot.rightWheelFront.isBusy())) {
 
                 // Display it for the driver.
-                telemetry.addData("Path1", "Running to %7d :%7d", newLeftFront, newRightFront);
+                telemetry.addData("Path1", "Running to %7d :%7d", newLeftFront, newRightFront, newLeftBack, newRightBack);
                 telemetry.addData("Path2", "Running at %7d :%7d",
                         robot.leftWheelFront.getCurrentPosition(),
                         robot.rightWheelFront.getCurrentPosition());

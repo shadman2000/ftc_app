@@ -23,7 +23,7 @@ public class mec extends LinearOpMode {
         robot.init(hardwareMap);
 
         //Ready message
-        telemetry.addData("Say ", "8201 robot is ready");
+        telemetry.addData("Say ", "MecTest robot is ready");
         telemetry.update();
 
         //Wait for play
@@ -81,8 +81,16 @@ public class mec extends LinearOpMode {
                 rightWheelPowerFront = gamepad1.right_stick_x;
                 rightWheelPowerBack = -gamepad1.right_stick_x;
             }
+            if(gamepad2.dpad_up == true){
+                rightWheelPowerFront = 1.0;
+                leftWheelPowerFront = 1.0;
+            }
+            if(gamepad2.dpad_down == true){
+                leftWheelPowerBack = 1.0;
+                rightWheelPowerBack = 1.0;
+            }
             //setting all motor (driving wheel) power to 0 if nothing is pressed
-            if(gamepad1.right_trigger <= 0 && gamepad1.left_trigger <= 0 && gamepad1.right_stick_x == 0) {         //DO NOT USE AN ELSE!!!!!!!!!!!!!!!!!
+            if(gamepad1.right_trigger <= 0 && gamepad1.left_trigger <= 0 && gamepad1.right_stick_x == 0 && gamepad2.dpad_up == false && gamepad2.dpad_down == false) {         //DO NOT USE AN ELSE!!!!!!!!!!!!!!!!!
                 rightWheelPowerFront = 0;
                 rightWheelPowerBack = 0;
                 leftWheelPowerFront = 0;
