@@ -29,13 +29,13 @@ public class mecAutoFront extends LinearOpMode {
         waitForStart();
 
         //Testing
-        encoderDrive(DRIVE_SPEED, 10, 10, 10,10,3);
+        encoderDrive(DRIVE_SPEED, 10.0, 10.0, 10.0,10.0,3);
         sleep(2000);
         encoderTurn(90);
         sleep(2000);
-        encoderMoveLeft(10);
+        encoderMoveLeft(10.0);
         sleep(2000);
-        encoderMoveRight(10);
+        encoderMoveRight(10.0);
     }
 
     // Reset encoders and kill motors
@@ -105,7 +105,7 @@ public class mecAutoFront extends LinearOpMode {
 
     public void encoderTurn(double degrees) {
         double circumference = 54.0;
-        double arc = circumference * (degrees / 360);           //Formula that get's the turn inches
+        double arc = circumference * (degrees / 360);
         encoderDrive(TURN_SPEED, arc, -arc, arc, -arc, 5.0);
     }
 
