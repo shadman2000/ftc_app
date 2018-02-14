@@ -12,6 +12,8 @@ public class mechard
     public DcMotor rightWheelBack;
     public DcMotor leftWheelFront;
     public DcMotor leftWheelBack;
+    public DcMotor collectorLeft;
+    public DcMotor collectorRight;
 
     /* Local OpMode members. */
     HardwareMap hwMap  = null;
@@ -32,14 +34,21 @@ public class mechard
         leftWheelBack  = hwMap.get(DcMotor.class, "leftWheelBack");
         rightWheelFront = hwMap.get(DcMotor.class, "rightWheelFront");
         rightWheelBack = hwMap.get(DcMotor.class, "rightWheelBack");
+
+        collectorLeft = hwMap.get(DcMotor.class, "collectorLeft");
+        collectorRight = hwMap.get(DcMotor.class, "collectorRight");
+
         leftWheelFront.setDirection(DcMotor.Direction.REVERSE);
         leftWheelBack.setDirection(DcMotor.Direction.REVERSE);
+        collectorRight.setDirection(DcMotor.Direction.REVERSE);
 
         // Set all motors to zero power
         leftWheelFront.setPower(0);
         leftWheelBack.setPower(0);
         rightWheelFront.setPower(0);
         rightWheelBack.setPower(0);
+        collectorLeft.setPower(0);
+        collectorRight.setPower(0);
 
 
         // Set all motors to run without encoders.
@@ -48,5 +57,7 @@ public class mechard
         leftWheelBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightWheelFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightWheelBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        collectorLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        collectorRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }

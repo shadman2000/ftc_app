@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team8201;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name = "mecTest", group = "Testing")
@@ -18,6 +19,9 @@ public class mec extends LinearOpMode {
         double leftWheelPowerBack = 0.0;
         double rightWheelPowerFront = 0.0;
         double rightWheelPowerBack = 0.0;
+
+        double collectorLeft = 0.0;
+        double collectorRight = 0.0;
 
         //Initializing the hardwareK9bot file
         robot.init(hardwareMap);
@@ -81,32 +85,55 @@ public class mec extends LinearOpMode {
                 rightWheelPowerFront = gamepad1.right_stick_x;
                 rightWheelPowerBack = -gamepad1.right_stick_x;
             }
-            if(gamepad2.dpad_up == true){
+            if(gamepad1.dpad_up == true){
                 rightWheelPowerFront = 1.0;
                 leftWheelPowerFront = 1.0;
             }
-            if(gamepad2.dpad_down == true){
+            if(gamepad1.dpad_down == true){
                 leftWheelPowerBack = 1.0;
                 rightWheelPowerBack = 1.0;
             }
             //setting all motor (driving wheel) power to 0 if nothing is pressed
             if(gamepad1.right_trigger <= 0 && gamepad1.left_trigger <= 0 && gamepad1.right_stick_x == 0 && gamepad2.dpad_up == false && gamepad2.dpad_down == false) {         //DO NOT USE AN ELSE!!!!!!!!!!!!!!!!!
-                rightWheelPowerFront = 0;
-                rightWheelPowerBack = 0;
-                leftWheelPowerFront = 0;
-                leftWheelPowerBack = 0;
+                rightWheelPowerFront = 0.0;
+                rightWheelPowerBack = 0.0;
+                leftWheelPowerFront = 0.0;
+                leftWheelPowerBack = 0.0;
             }
+
+            //Gamepad 2
+            //Collector wheels
+            if(gamepad2.right_trigger > 0){
+                collectorLeft = gamepad2.right_trigger;
+                collectorRight = gamepad2.right_trigger;
+
+            }
+
+            if(gamepad2.left_trigger > 0){
+                collectorLeft = -gamepad2.left_trigger;
+                collectorRight = -gamepad2.left_trigger;
+            }
+
+            if(gamepad2.left_trigger == 0 && gamepad2.right_trigger == 0){
+                collectorLeft = 0.0;
+                collectorRight = 0.0;
+            }
+
             //Sending the powers as motor Power
             robot.leftWheelFront.setPower(leftWheelPowerFront);
             robot.leftWheelBack.setPower(leftWheelPowerBack);
             robot.rightWheelBack.setPower(rightWheelPowerFront);
             robot.rightWheelFront.setPower(rightWheelPowerBack);
+            robot.collectorLeft.setPower(collectorLeft-0.25);
+            robot.collectorRight.setPower(collectorLeft-0.25);
 
             //Testing messages
             telemetry.addData("leftWheelPowerFront" , leftWheelPowerFront);
             telemetry.addData("leftWheelPowerBack" , leftWheelPowerBack);
             telemetry.addData("rightWheelPowerFront" , rightWheelPowerFront);
             telemetry.addData("rightWheelPowerBack" , rightWheelPowerBack);
+            telemetry.addData("rightCollector" , collectorRight);
+            telemetry.addData("leftCollector" , collectorLeft);
             telemetry.update();
         }
     }
