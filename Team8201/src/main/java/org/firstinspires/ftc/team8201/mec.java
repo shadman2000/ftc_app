@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.team8201;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name = "mecTest", group = "Testing")
@@ -15,125 +14,133 @@ public class mec extends LinearOpMode {
 
         //Declare the variables
         //Motor(s)
-        double leftWheelPowerFront = 0.0;
-        double leftWheelPowerBack = 0.0;
-        double rightWheelPowerFront = 0.0;
-        double rightWheelPowerBack = 0.0;
+        // double leftWheelPowerFront = 0.0;
+        // double leftWheelPowerBack = 0.0;
+        // double rightWheelPowerFront = 0.0;
+        // double rightWheelPowerBack = 0.0;
 
-        double collectorLeft = 0.0;
-        double collectorRight = 0.0;
+        double cl = 0.0;
+        double cr = 0.0;
 
-        //Initializing the hardwareK9bot file
+        // //Initializing the hardwareK9bot file
         robot.init(hardwareMap);
 
-        //Ready message
+        // //Ready message
         telemetry.addData("Say ", "MecTest robot is ready");
         telemetry.update();
 
-        //Wait for play
+        // //Wait for play
         waitForStart();
 
-        //opMode code that will run in a loop while we are in opMode
+        // //opMode code that will run in a loop while we are in opMode
         while (opModeIsActive()) {
-            //Mecanum Wheel
-            //Forward and turn
-            if(gamepad1.right_trigger > 0) {
-                //Redefining the power of both wheel according to the position of the trigger
-                leftWheelPowerFront = gamepad1.right_trigger;
-                leftWheelPowerBack = gamepad1.right_trigger;
-                rightWheelPowerFront = gamepad1.right_trigger;
-                rightWheelPowerBack = gamepad1.right_trigger;
-                //Setting wheelPowers for turning
-                if (gamepad1.left_stick_x > 0) {
-                    rightWheelPowerFront = -gamepad1.right_trigger;
-                    rightWheelPowerBack = -gamepad1.right_trigger;
-                }
-                if (gamepad1.left_stick_x < 0) {
-                    leftWheelPowerFront = -gamepad1.right_trigger;
-                    leftWheelPowerBack = -gamepad1.right_trigger;
-                }
+            //     //Mecanum Wheel
+            //     //Forward and turn
+            //     if(gamepad1.right_trigger > 0) {
+            //         //Redefining the power of both wheel according to the position of the trigger
+            //         leftWheelPowerFront = gamepad1.right_trigger;
+            //         leftWheelPowerBack = gamepad1.right_trigger;
+            //         rightWheelPowerFront = gamepad1.right_trigger;
+            //         rightWheelPowerBack = gamepad1.right_trigger;
+            //         //Setting wheelPowers for turning
+            //         if (gamepad1.left_stick_x > 0) {
+            //             rightWheelPowerFront = -gamepad1.right_trigger;
+            //             rightWheelPowerBack = -gamepad1.right_trigger;
+            //         }
+            //         if (gamepad1.left_stick_x < 0) {
+            //             leftWheelPowerFront = -gamepad1.right_trigger;
+            //             leftWheelPowerBack = -gamepad1.right_trigger;
+            //         }
 
-            }
-            //Backward and turn
-            if(gamepad1.left_trigger > 0){
-                //Redefining the power of both wheel according to the position of the trigger
-                rightWheelPowerBack = -gamepad1.left_trigger;
-                rightWheelPowerFront = -gamepad1.left_trigger;
-                leftWheelPowerBack = -gamepad1.left_trigger;
-                leftWheelPowerFront = -gamepad1.left_trigger;
-                //Setting wheelPowers for turning
-                if(gamepad1.left_stick_x > 0){
-                    rightWheelPowerFront = gamepad1.left_trigger;
-                    rightWheelPowerBack = gamepad1.left_trigger;
-                }
-                if(gamepad1.left_stick_x < 0){
-                    leftWheelPowerFront = gamepad1.left_trigger;
-                    leftWheelPowerBack = gamepad1.left_trigger;
-                }
-            }
-            //Going right
-            if(gamepad1.right_stick_x > 0){
-                rightWheelPowerFront = gamepad1.right_stick_x;
-                rightWheelPowerBack = -gamepad1.right_stick_x;
-                leftWheelPowerFront = gamepad1.right_stick_x;
-                leftWheelPowerBack = -gamepad1.right_stick_x;
-            }
-            //Going Left
-            if(gamepad1.right_stick_x < 0){
-                leftWheelPowerBack = -gamepad1.right_stick_x;
-                leftWheelPowerFront = gamepad1.right_stick_x;
-                rightWheelPowerFront = gamepad1.right_stick_x;
-                rightWheelPowerBack = -gamepad1.right_stick_x;
-            }
-            if(gamepad1.dpad_up == true){
-                rightWheelPowerFront = 1.0;
-                leftWheelPowerFront = 1.0;
-            }
-            if(gamepad1.dpad_down == true){
-                leftWheelPowerBack = 1.0;
-                rightWheelPowerBack = 1.0;
-            }
-            //setting all motor (driving wheel) power to 0 if nothing is pressed
-            if(gamepad1.right_trigger <= 0 && gamepad1.left_trigger <= 0 && gamepad1.right_stick_x == 0 && gamepad2.dpad_up == false && gamepad2.dpad_down == false) {         //DO NOT USE AN ELSE!!!!!!!!!!!!!!!!!
-                rightWheelPowerFront = 0.0;
-                rightWheelPowerBack = 0.0;
-                leftWheelPowerFront = 0.0;
-                leftWheelPowerBack = 0.0;
-            }
+            //     }
+            //     //Backward and turn
+            //     if(gamepad1.left_trigger > 0){
+            //         //Redefining the power of both wheel according to the position of the trigger
+            //         rightWheelPowerBack = -gamepad1.left_trigger;
+            //         rightWheelPowerFront = -gamepad1.left_trigger;
+            //         leftWheelPowerBack = -gamepad1.left_trigger;
+            //         leftWheelPowerFront = -gamepad1.left_trigger;
+            //         //Setting wheelPowers for turning
+            //         if(gamepad1.left_stick_x > 0){
+            //             rightWheelPowerFront = gamepad1.left_trigger;
+            //             rightWheelPowerBack = gamepad1.left_trigger;
+            //         }
+            //         if(gamepad1.left_stick_x < 0){
+            //             leftWheelPowerFront = gamepad1.left_trigger;
+            //             leftWheelPowerBack = gamepad1.left_trigger;
+            //         }
+            //     }
+            //     //Going right
+            //     if(gamepad1.right_stick_x > 0){
+            //         rightWheelPowerFront = gamepad1.right_stick_x;
+            //         rightWheelPowerBack = -gamepad1.right_stick_x;
+            //         leftWheelPowerFront = gamepad1.right_stick_x;
+            //         leftWheelPowerBack = -gamepad1.right_stick_x;
+            //     }
+            //     //Going Left
+            //     if(gamepad1.right_stick_x < 0){
+            //         leftWheelPowerBack = -gamepad1.right_stick_x;
+            //         leftWheelPowerFront = gamepad1.right_stick_x;
+            //         rightWheelPowerFront = gamepad1.right_stick_x;
+            //         rightWheelPowerBack = -gamepad1.right_stick_x;
+            //     }
+            //     if(gamepad1.dpad_up == true){
+            //         rightWheelPowerFront = 1.0;
+            //         leftWheelPowerFront = 1.0;
+            //     }
+            //     if(gamepad1.dpad_down == true){
+            //         leftWheelPowerBack = 1.0;
+            //         rightWheelPowerBack = 1.0;
+            //     }
+            //     //setting all motor (driving wheel) power to 0 if nothing is pressed
+            //     if(gamepad1.right_trigger <= 0 && gamepad1.left_trigger <= 0 && gamepad1.right_stick_x == 0 && gamepad2.dpad_up == false && gamepad2.dpad_down == false) {         //DO NOT USE AN ELSE!!!!!!!!!!!!!!!!!
+            //         rightWheelPowerFront = 0.0;
+            //         rightWheelPowerBack = 0.0;
+            //         leftWheelPowerFront = 0.0;
+            //         leftWheelPowerBack = 0.0;
+            //     }
 
             //Gamepad 2
             //Collector wheels
             if(gamepad2.right_trigger > 0){
-                collectorLeft = gamepad2.right_trigger;
-                collectorRight = gamepad2.right_trigger;
+                cl = -gamepad2.right_trigger;
 
             }
 
             if(gamepad2.left_trigger > 0){
-                collectorLeft = -gamepad2.left_trigger;
-                collectorRight = -gamepad2.left_trigger;
+                cl = gamepad2.left_trigger;
             }
 
             if(gamepad2.left_trigger == 0 && gamepad2.right_trigger == 0){
-                collectorLeft = 0.0;
-                collectorRight = 0.0;
+                cl = 0.0;
+                cr = 0.0;
+            }
+
+            if(gamepad2.y == true){
+                robot.liftLeft.setPosition(1);
+                robot.liftRight.setPosition(0);
+            }
+
+            if(gamepad2.a == true){
+                robot.liftLeft.setPosition(0);
+                robot.liftRight.setPosition(1);
             }
 
             //Sending the powers as motor Power
-            robot.leftWheelFront.setPower(leftWheelPowerFront);
-            robot.leftWheelBack.setPower(leftWheelPowerBack);
-            robot.rightWheelBack.setPower(rightWheelPowerFront);
-            robot.rightWheelFront.setPower(rightWheelPowerBack);
-            robot.collectorLeft.setPower(collectorLeft-0.25);
-            robot.collectorRight.setPower(collectorLeft-0.25);
+            // robot.leftWheelFront.setPower(leftWheelPowerFront);
+            // robot.leftWheelBack.setPower(leftWheelPowerBack);
+            // robot.rightWheelBack.setPower(rightWheelPowerFront);
+            // robot.rightWheelFront.setPower(rightWheelPowerBack);
+            robot.collectorLeft.setPower(cl);
+            robot.collectorRight.setPower(cl);
 
             //Testing messages
-            telemetry.addData("leftWheelPowerFront" , leftWheelPowerFront);
-            telemetry.addData("leftWheelPowerBack" , leftWheelPowerBack);
-            telemetry.addData("rightWheelPowerFront" , rightWheelPowerFront);
-            telemetry.addData("rightWheelPowerBack" , rightWheelPowerBack);
-            telemetry.addData("rightCollector" , collectorRight);
-            telemetry.addData("leftCollector" , collectorLeft);
+            //  telemetry.addData("leftWheelPowerFront" , leftWheelPowerFront);
+            //  telemetry.addData("leftWheelPowerBack" , leftWheelPowerBack);
+            //  telemetry.addData("rightWheelPowerFront" , rightWheelPowerFront);
+            //  telemetry.addData("rightWheelPowerBack" , rightWheelPowerBack);
+            telemetry.addData("rightCollector" , cl);
+            telemetry.addData("leftCollector" , cr);
             telemetry.update();
         }
     }
