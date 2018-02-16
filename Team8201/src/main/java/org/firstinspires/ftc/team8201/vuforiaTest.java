@@ -47,8 +47,9 @@ public class vuforiaTest extends LinearOpMode {
             }else {
                 telemetry.addData("VuMark", "not visible");
             }
-            if(vuMark.equals("LEFT")){
+            if(vuMark == RelicRecoveryVuMark.LEFT){
                 telemetry.addData("testLeft","works.equals");
+                telemetry.update();
             }
             telemetry.addData("test",vuMark);
             telemetry.update();
