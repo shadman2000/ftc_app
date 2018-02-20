@@ -5,18 +5,16 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "FrontEncoder", group = "Autonomous")
+@Autonomous(name = "encoderTest", group = "Autonomous")
 public class mecAutoFront extends LinearOpMode {
     mechard robot = new mechard();
     private ElapsedTime runtime = new ElapsedTime();
 
     //Start declaring the variables
     static final double COUNTS_PER_MOTOR_REV = 280;     //The Motor we have Encoder
-    static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
-    static final double WHEEL_DIAMETER_INCHES = 4.0;    // For figuring circumference
-    static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double DRIVE_SPEED = 0.6;
-    static final double TURN_SPEED = 0.5;
+    static final double COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV/3.14;
+    static final double DRIVE_SPEED = 0.5;
+    static final double TURN_SPEED = 0.7;
 
     @Override
     public void runOpMode() {
@@ -29,14 +27,15 @@ public class mecAutoFront extends LinearOpMode {
         waitForStart();
 
         //Testing
-        encoderDrive(DRIVE_SPEED, 50.0, 50.0, 50.0, 50.0, 3);
-        robot.rightWheelBack.setPower(0.0);
-        // sleep(2000);
-        // encoderTurn(90);
-        // sleep(2000);
-        // encoderMoveLeft(10.0);
-        // sleep(2000);
-        // encoderMoveRight(10.0);
+        encoderDrive(DRIVE_SPEED, 30.0, 30.0, 30.0, 30.0, 8);
+        sleep(2000);
+        encoderTurn(-90);
+        sleep(2000);
+        encoderDrive(DRIVE_SPEED, 30.0, 30.0, 30.0, 30.0, 8);
+        sleep(2000);
+        encoderTurn(-90);
+        sleep(2000);
+        encoderDrive(DRIVE_SPEED, 30.0, 30.0, 30.0, 30.0, 8);
     }
 
     // Reset encoders and kill motors
@@ -94,10 +93,8 @@ public class mecAutoFront extends LinearOpMode {
                     (robot.leftWheelFront.isBusy() && robot.rightWheelFront.isBusy())) {
 
                 // Display it for the driver.
-                telemetry.addData("Path1", "Running to %7d :%7d", newLeftFront, newRightFront, newLeftBack, newRightBack);
-                telemetry.addData("Path2", "Running at %7d :%7d",
-                        robot.leftWheelFront.getCurrentPosition(),
-                        robot.rightWheelFront.getCurrentPosition());
+                telemetry.addData("lf" , newLeftFront);
+                telemetry.addData("rb" , newRightBack);
                 telemetry.update();
             }
 
@@ -105,9 +102,9 @@ public class mecAutoFront extends LinearOpMode {
     }
 
     public void encoderTurn(double degrees) {
-        double circumference = 54.0;
+        double circumference = 92.5;
         double arc = circumference * (degrees / 360);
-        encoderDrive(TURN_SPEED, arc, -arc, arc, -arc, 5.0);
+        encoderDrive(TURN_SPEED, arc, -arc, arc, -arc, 10.0);
     }
 
     public void encoderMoveLeft(double inches){                 //Test it out
