@@ -20,6 +20,7 @@ public class mechard
     public Servo liftRight;
     public Servo flip;
     public Servo cop;
+    public Servo gem;
 
 
     /* Local OpMode members. */
@@ -45,6 +46,7 @@ public class mechard
         // collectorLeft = hwMap.get(DcMotor.class, "cleft");
         // collectorRight = hwMap.get(DcMotor.class, "cright");
 
+        gem = hwMap.get(Servo.class,"gemArm");
         // liftLeft = hwMap.get(Servo.class, "lleft");
         // liftRight = hwMap.get(Servo.class, "lright");
         // flip = hwMap.get(Servo.class, "flipper");

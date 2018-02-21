@@ -21,6 +21,7 @@ public class mec extends LinearOpMode {
 
         double cl = 0.0;
         double cr = 0.0;
+        double gemA = 0.0;
 
         // //Initializing the hardwareK9bot file
         robot.init(hardwareMap);
@@ -100,6 +101,17 @@ public class mec extends LinearOpMode {
                 leftWheelPowerBack = 0.0;
             }
 
+            //test
+            if(gamepad1.dpad_down == true){
+                gemA -= 0.001;
+                robot.gem.setPosition(gemA);
+            }
+
+            if(gamepad1.dpad_up == true){
+                gemA += 0.001;
+                robot.gem.setPosition(gemA);
+            }
+
             // //Gamepad 2
             // //Collector wheels
             // if(gamepad2.right_trigger > 0){
@@ -139,6 +151,7 @@ public class mec extends LinearOpMode {
             telemetry.addData("leftWheelPowerBack" , leftWheelPowerBack);
             telemetry.addData("rightWheelPowerFront" , rightWheelPowerFront);
             telemetry.addData("rightWheelPowerBack" , rightWheelPowerBack);
+            telemetry.addData("gemArm" , gemA);
             // telemetry.addData("rightCollector" , cl);
             // telemetry.addData("leftCollector" , cr);
             telemetry.update();
