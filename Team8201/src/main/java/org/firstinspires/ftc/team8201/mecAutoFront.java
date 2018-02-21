@@ -12,7 +12,7 @@ public class mecAutoFront extends LinearOpMode {
 
     //Start declaring the variables
     static final double COUNTS_PER_MOTOR_REV = 280;     //The Motor we have Encoder
-    static final double COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV/3.14;
+    static final double COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV/ Math.PI;
     static final double DRIVE_SPEED = 0.5;
     static final double TURN_SPEED = 0.7;
 

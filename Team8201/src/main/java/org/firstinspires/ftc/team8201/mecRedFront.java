@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team8201;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import android.graphics.Color;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -24,7 +25,7 @@ public class mecRedFront extends LinearOpMode{
 
     //Start declaring the variables
     static final double COUNTS_PER_MOTOR_REV = 280;     //The Motor we have Encoder
-    static final double COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV/3.14;
+    static final double COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV/Math.PI;
     static final double DRIVE_SPEED = 0.7;
     static final double TURN_SPEED = 0.7;
     static final double FORWARD_SPEED = 0.5;
@@ -76,34 +77,27 @@ public class mecRedFront extends LinearOpMode{
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-//        Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
-//                (int) (sensorColor.green() * SCALE_FACTOR),
-//                (int) (sensorColor.blue() * SCALE_FACTOR),
-//                hsvValues);
-
 
         //Drop gemArm
         sleep(3000);
 
         if(sensorColor.red() > sensorColor.blue()){
-            backward(1);
+            drive(-2);
             sleep(1000);
-            forward(1);
+            drive(2);
             sleep(1000);
+            //pick up gemArm
         }
         if(sensorColor.blue() > sensorColor.red()){
-            forward(1);
+            drive(2);
             sleep(1000);
-            backward(1);
+            drive(-2);
             sleep(1000);
+            //pick up gemArm
         }
-        forward(5);
-        backward(5);
-        right(5);
-        left(5);
 
         //Activate after knocking the jewel
-        relicTrackables.activate();
+//        relicTrackables.activate();
 
         //END POWERS
         robot.leftWheelFront.setPower(0);
@@ -120,10 +114,10 @@ public class mecRedFront extends LinearOpMode{
             // convert the RGB values to HSV values.
             // multiply by the SCALE_FACTOR.
             // then cast it back to int (SCALE_FACTOR is a double)
-//            Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
-//                    (int) (sensorColor.green() * SCALE_FACTOR),
-//                    (int) (sensorColor.blue() * SCALE_FACTOR),
-//                    hsvValues);
+            Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
+                    (int) (sensorColor.green() * SCALE_FACTOR),
+                    (int) (sensorColor.blue() * SCALE_FACTOR),
+                    hsvValues);
 
             // send the info back to driver station using telemetry function.
             telemetry.addData("Alpha", sensorColor.alpha());
@@ -195,6 +189,10 @@ public class mecRedFront extends LinearOpMode{
 
     public void encoderMoveRight(double inches){                 //Test it out
         encoderDrive(DRIVE_SPEED, inches, -inches, -inches, inches, 5.0);
+    }
+
+    public void drive(double inches){
+        encoderDrive(DRIVE_SPEED, inches,inches,inches,inches,10.0);
     }
 
     public void stopAndResetEncoders() {
