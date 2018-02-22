@@ -21,7 +21,9 @@ public class mec extends LinearOpMode {
 
         double cl = 0.0;
         double cr = 0.0;
-        double gemA = 0.0;
+        double gemA = 0.849;  //0.29
+        double hr = 1.0;
+        double hl = 0.0;
 
         // //Initializing the hardwareK9bot file
         robot.init(hardwareMap);
@@ -101,60 +103,64 @@ public class mec extends LinearOpMode {
                 leftWheelPowerBack = 0.0;
             }
 
-            //test
-            if(gamepad1.dpad_down == true){
-                gemA -= 0.001;
-                robot.gem.setPosition(gemA);
+            //      //test
+            //      if(gamepad1.dpad_down == true){
+            //         gemA -= 0.025;
+            //         robot.gem.setPosition(gemA);
+            //      }
+
+            //      if(gamepad1.dpad_up == true){
+            //          gemA += 0.025;
+            //          robot.gem.setPosition(gemA);
+            //      }
+
+            //Gamepad 2
+            //Collector wheels
+            if(gamepad2.right_trigger > 0){
+                cl = -gamepad2.right_trigger;
+
             }
 
-            if(gamepad1.dpad_up == true){
-                gemA += 0.001;
-                robot.gem.setPosition(gemA);
+            if(gamepad2.left_trigger > 0){
+                cl = gamepad2.left_trigger;
             }
 
-            // //Gamepad 2
-            // //Collector wheels
-            // if(gamepad2.right_trigger > 0){
-            //     cl = -gamepad2.right_trigger;
+            if(gamepad2.left_trigger == 0 && gamepad2.right_trigger == 0){
+                cl = 0.0;
+                cr = 0.0;
+            }
 
-            // }
+            if(gamepad2.dpad_up){
+                robot.liftLeft.setPosition(0);
+                robot.liftRight.setPosition(1);
+            }
 
-            // if(gamepad2.left_trigger > 0){
-            //     cl = gamepad2.left_trigger;
-            // }
-
-            // if(gamepad2.left_trigger == 0 && gamepad2.right_trigger == 0){
-            //     cl = 0.0;
-            //     cr = 0.0;
-            // }
-
-            // if(gamepad2.y == true){
-            //     robot.liftLeft.setPosition(1);
-            //     robot.liftRight.setPosition(0);
-            // }
-
-            // if(gamepad2.a == true){
-            //     robot.liftLeft.setPosition(0);
-            //     robot.liftRight.setPosition(1);
-            // }
+            if(gamepad2.dpad_down){
+                robot.liftLeft.setPosition(1);
+                robot.liftRight.setPosition(0);
+            }
 
             //Sending the powers as motor Power
             robot.leftWheelFront.setPower(leftWheelPowerFront);
             robot.leftWheelBack.setPower(leftWheelPowerBack);
             robot.rightWheelBack.setPower(rightWheelPowerFront);
             robot.rightWheelFront.setPower(rightWheelPowerBack);
-            // robot.collectorLeft.setPower(cl);
-            // robot.collectorRight.setPower(cl);
+            robot.collectorLeft.setPower(cl);
+            robot.collectorRight.setPower(cl);
 
             //Testing messages
             telemetry.addData("leftWheelPowerFront" , leftWheelPowerFront);
             telemetry.addData("leftWheelPowerBack" , leftWheelPowerBack);
             telemetry.addData("rightWheelPowerFront" , rightWheelPowerFront);
             telemetry.addData("rightWheelPowerBack" , rightWheelPowerBack);
-            telemetry.addData("gemArm" , gemA);
+            // telemetry.addData("gemArm" , gemA);
             // telemetry.addData("rightCollector" , cl);
             // telemetry.addData("leftCollector" , cr);
+            // telemetry.addData("hl" , hl);
+            // telemetry.addData("hr" , hr);
             telemetry.update();
+
+            sleep(40);
         }
     }
 }

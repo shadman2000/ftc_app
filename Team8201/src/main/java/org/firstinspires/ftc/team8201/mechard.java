@@ -38,34 +38,34 @@ public class mechard
         // Define and Initialize Motors
 
         //Wheels
-        leftWheelFront  = hwMap.get(DcMotor.class, "leftWheelFront");
-        leftWheelBack  = hwMap.get(DcMotor.class, "leftWheelBack");
-        rightWheelFront = hwMap.get(DcMotor.class, "rightWheelFront");
-        rightWheelBack = hwMap.get(DcMotor.class, "rightWheelBack");
+        leftWheelFront  = hwMap.get(DcMotor.class, "lf");
+        leftWheelBack  = hwMap.get(DcMotor.class, "lb");
+        rightWheelFront = hwMap.get(DcMotor.class, "rf");
+        rightWheelBack = hwMap.get(DcMotor.class, "rb");
 
-        // collectorLeft = hwMap.get(DcMotor.class, "cleft");
-        // collectorRight = hwMap.get(DcMotor.class, "cright");
+        collectorLeft = hwMap.get(DcMotor.class, "cleft");
+        collectorRight = hwMap.get(DcMotor.class, "cright");
 
         gem = hwMap.get(Servo.class,"gemArm");
-        // liftLeft = hwMap.get(Servo.class, "lleft");
-        // liftRight = hwMap.get(Servo.class, "lright");
-        // flip = hwMap.get(Servo.class, "flipper");
-        // // cop = hwMap.get(Servo.class, "cp");
+        liftLeft = hwMap.get(Servo.class, "lleft"); // hl 0.47      0.92        0.37
+        liftRight = hwMap.get(Servo.class, "lright"); // hr 0.52    0.075       0.62
+        flip = hwMap.get(Servo.class, "flipper");
+        // cop = hwMap.get(Servo.class, "cp");
 
         leftWheelFront.setDirection(DcMotor.Direction.REVERSE);
         leftWheelBack.setDirection(DcMotor.Direction.REVERSE);
-        // collectorRight.setDirection(DcMotor.Direction.REVERSE);
+        collectorRight.setDirection(DcMotor.Direction.REVERSE);
 
         // Set all motors to zero power
         leftWheelFront.setPower(0);
         leftWheelBack.setPower(0);
         rightWheelFront.setPower(0);
         rightWheelBack.setPower(0);
-        // collectorLeft.setPower(0);
-        // collectorRight.setPower(0);
-        // liftLeft.setPosition(0.34);
-        // liftRight.setPosition(0.66);
-        // // cop.setPosition(0.0);
+        collectorLeft.setPower(0);
+        collectorRight.setPower(0);
+        // liftLeft.setPosition(0.37);
+        // liftRight.setPosition(0.62);
+        // cop.setPosition(0.0);
 
 
 
@@ -75,7 +75,7 @@ public class mechard
         leftWheelBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightWheelFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightWheelBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        // collectorLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        // collectorRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        collectorLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        collectorRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }
