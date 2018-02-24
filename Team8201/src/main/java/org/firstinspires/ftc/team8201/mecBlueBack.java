@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
@@ -30,6 +31,8 @@ public class mecBlueBack extends LinearOpMode{
     static final double DRIVE_SPEED = 0.7;
     static final double TURN_SPEED = 0.5;
     static final double FORWARD_SPEED = 1;
+
+    public String vColumn = "";
 
     @Override
     public void runOpMode() {
@@ -78,36 +81,48 @@ public class mecBlueBack extends LinearOpMode{
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
+        relicTrackables.activate();
+        //dropGemArm
+        sleep(3000);
+        if(sensorColor.blue() > sensorColor.red()){
+            sleep(2000);
+            drive(-2);
+            sleep(1000);
+            drive(2);
+            sleep(1000);
+            //pick up gemArm
+        }
+        if(sensorColor.red() > sensorColor.blue()){
+            sleep(2000);
+            drive(2);
+            sleep(1000);
+            drive(-2);
+            sleep(1000);
+            //pick up gemArm
+        }
 
-        drive(30);
-        sleep(1000);
-        encoderTurn(90);
-        sleep(1000);
-        glyphUp();
-        sleep(500);
-        glyphDown();
+        if(vColumn == "LEFT"){
+            drive(28);
+            sleep(1000);
+            encoderTurn(90);
+            glyphUp();
+        }
 
+        if(vColumn == "RIGHT"){
 
-        //Drop gemArm
-//        sleep(3000);
-//
-//        if(sensorColor.blue() > sensorColor.red()){
-//            drive(-2);
-//            sleep(1000);
-//            drive(2);
-//            sleep(1000);
-//            //pick up gemArm
-//        }
-//        if(sensorColor.red() > sensorColor.blue()){
-//            drive(2);
-//            sleep(1000);
-//            drive(-2);
-//            sleep(1000);
-//            //pick up gemArm
-//        }
+        }
 
-        //Activate after knocking the jewel
-//        relicTrackables.activate();
+        if(vColumn == "CENTER"){
+
+        }
+
+        if(vColumn == "CD"){
+            drive(28);
+            sleep(1000);
+            encoderTurn(90);
+            glyphUp();
+        }
+
 
         //END POWERS
         robot.leftWheelFront.setPower(0);
@@ -121,6 +136,7 @@ public class mecBlueBack extends LinearOpMode{
 
         //color values
         while (opModeIsActive()) {
+            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
             // convert the RGB values to HSV values.
             // multiply by the SCALE_FACTOR.
             // then cast it back to int (SCALE_FACTOR is a double)
@@ -136,54 +152,20 @@ public class mecBlueBack extends LinearOpMode{
             telemetry.addData("Blue ", sensorColor.blue());
             telemetry.addData("Hue", hsvValues[0]);
             telemetry.update();
-        }
-    }
 
-    public void forward(int time){
-        runtime.reset();
-        robot.leftWheelFront.setPower(FORWARD_SPEED);
-        robot.leftWheelBack.setPower(FORWARD_SPEED);
-        robot.rightWheelFront.setPower(FORWARD_SPEED);
-        robot.rightWheelBack.setPower(FORWARD_SPEED);
-        while (opModeIsActive() && (runtime.seconds() < time)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-    }
+            if(vuMark == RelicRecoveryVuMark.LEFT){
+                vColumn = "LEFT";
+            }
+            if(vuMark == RelicRecoveryVuMark.RIGHT){
+                vColumn = "RIGHT";
+            }
+            if(vuMark == RelicRecoveryVuMark.CENTER){
+                vColumn = "CENTER";
+            }
 
-    public void backward(int time){
-        runtime.reset();
-        robot.leftWheelFront.setPower(-FORWARD_SPEED);
-        robot.leftWheelBack.setPower(-FORWARD_SPEED);
-        robot.rightWheelFront.setPower(-FORWARD_SPEED);
-        robot.rightWheelBack.setPower(-FORWARD_SPEED);
-        while (opModeIsActive() && (runtime.seconds() < time)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-    }
-
-    public void left(int time){
-        runtime.reset();
-        robot.leftWheelFront.setPower(-FORWARD_SPEED);
-        robot.leftWheelBack.setPower(FORWARD_SPEED);
-        robot.rightWheelFront.setPower(FORWARD_SPEED);
-        robot.rightWheelBack.setPower(-FORWARD_SPEED);
-        while (opModeIsActive() && (runtime.seconds() < time)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-    }
-
-    public void right(int time){
-        runtime.reset();
-        robot.leftWheelFront.setPower(FORWARD_SPEED);
-        robot.leftWheelBack.setPower(-FORWARD_SPEED);
-        robot.rightWheelFront.setPower(-FORWARD_SPEED);
-        robot.rightWheelBack.setPower(FORWARD_SPEED);
-        while (opModeIsActive() && (runtime.seconds() < time)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
+            if(vuMark == RelicRecoveryVuMark.UNKNOWN){
+                vColumn = "CD";
+            }
         }
     }
 
@@ -206,13 +188,13 @@ public class mecBlueBack extends LinearOpMode{
     }
 
     public void glyphUp(){
-        robot.liftLeft.setPosition(0.024);
-        robot.liftRight.setPosition(0.975);
+        robot.liftLeft.setPosition(0);
+        robot.liftRight.setPosition(1);
     }
 
     public void glyphDown(){
-        robot.liftLeft.setPosition(1.0);
-        robot.liftRight.setPosition(0.0);
+        robot.liftLeft.setPosition(1);
+        robot.liftRight.setPosition(0);
     }
 
     public void stopAndResetEncoders() {

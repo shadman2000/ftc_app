@@ -22,8 +22,6 @@ public class mec extends LinearOpMode {
         double cl = 0.0;
         double cr = 0.0;
         double gemA = 0.849;  //0.29
-        double hr = 1.00;
-        double hl = 0.0;
 
         // //Initializing the hardwareK9bot file
         robot.init(hardwareMap);
