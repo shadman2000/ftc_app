@@ -15,9 +15,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
-@Autonomous(name="blue_back", group="Pushbot")
+@Autonomous(name="red_back", group="Pushbot")
 //@Disabled
-public class mecBlueBack extends LinearOpMode{
+public class mecRedBack extends LinearOpMode{
 
     ColorSensor sensorColor;
     DistanceSensor sensorDistance;
@@ -85,7 +85,7 @@ public class mecBlueBack extends LinearOpMode{
         relicTrackables.activate();
         //dropGemArm
         sleep(3000);
-        if(sensorColor.blue() > sensorColor.red()){
+        if(sensorColor.red() > sensorColor.blue()){
             sleep(2000);
             drive(-2);
             sleep(1000);
@@ -93,7 +93,7 @@ public class mecBlueBack extends LinearOpMode{
             sleep(1000);
             //pick up gemArm
         }
-        if(sensorColor.red() > sensorColor.blue()){
+        if(sensorColor.blue() > sensorColor.red()){
             sleep(2000);
             drive(2);
             sleep(1000);
@@ -103,7 +103,7 @@ public class mecBlueBack extends LinearOpMode{
         }
 
         if(vColumn == "LEFT"){
-            drive(-28);
+            drive(28);
             sleep(1000);
             encoderTurn(90);
             glyphUp();
@@ -118,7 +118,7 @@ public class mecBlueBack extends LinearOpMode{
         }
 
         if(vColumn == "CD"){
-            drive(-28);
+            drive(28);
             sleep(1000);
             encoderTurn(90);
             glyphUp();
@@ -135,6 +135,7 @@ public class mecBlueBack extends LinearOpMode{
         telemetry.update();
         sleep(1000);
 
+        //color values
         while (opModeIsActive()) {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
             // convert the RGB values to HSV values.

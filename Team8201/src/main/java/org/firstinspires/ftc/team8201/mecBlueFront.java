@@ -17,7 +17,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 @Autonomous(name="blue_back", group="Pushbot")
 //@Disabled
-public class mecBlueBack extends LinearOpMode{
+public class mecBlueFront extends LinearOpMode{
 
     ColorSensor sensorColor;
     DistanceSensor sensorDistance;
@@ -103,10 +103,7 @@ public class mecBlueBack extends LinearOpMode{
         }
 
         if(vColumn == "LEFT"){
-            drive(-28);
-            sleep(1000);
-            encoderTurn(90);
-            glyphUp();
+
         }
 
         if(vColumn == "RIGHT"){
@@ -118,10 +115,7 @@ public class mecBlueBack extends LinearOpMode{
         }
 
         if(vColumn == "CD"){
-            drive(-28);
-            sleep(1000);
-            encoderTurn(90);
-            glyphUp();
+
         }
 
 
@@ -135,6 +129,7 @@ public class mecBlueBack extends LinearOpMode{
         telemetry.update();
         sleep(1000);
 
+        //color values
         while (opModeIsActive()) {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
             // convert the RGB values to HSV values.

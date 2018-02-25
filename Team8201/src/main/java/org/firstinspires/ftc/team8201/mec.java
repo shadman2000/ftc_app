@@ -116,11 +116,13 @@ public class mec extends LinearOpMode {
             //Collector wheels
             if(gamepad2.right_trigger > 0){
                 cl = -gamepad2.right_trigger;
+                cr = -gamepad2.right_trigger;
 
             }
 
             if(gamepad2.left_trigger > 0){
                 cl = gamepad2.left_trigger;
+                cr = gamepad2.left_trigger;
             }
 
             if(gamepad2.left_trigger == 0 && gamepad2.right_trigger == 0){
@@ -144,7 +146,7 @@ public class mec extends LinearOpMode {
             robot.rightWheelBack.setPower(rightWheelPowerFront);
             robot.rightWheelFront.setPower(rightWheelPowerBack);
             robot.collectorLeft.setPower(cl);
-            robot.collectorRight.setPower(cl);
+            robot.collectorRight.setPower(cr);
 
             //Testing messages
             telemetry.addData("leftWheelPowerFront" , leftWheelPowerFront);

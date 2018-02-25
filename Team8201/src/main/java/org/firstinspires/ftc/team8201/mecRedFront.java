@@ -1,14 +1,16 @@
 package org.firstinspires.ftc.team8201;
 
+import android.graphics.Color;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
-import android.graphics.Color;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
@@ -27,8 +29,10 @@ public class mecRedFront extends LinearOpMode{
     static final double COUNTS_PER_MOTOR_REV = 280;     //The Motor we have Encoder
     static final double COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV/Math.PI;
     static final double DRIVE_SPEED = 0.7;
-    static final double TURN_SPEED = 0.7;
-    static final double FORWARD_SPEED = 0.5;
+    static final double TURN_SPEED = 0.5;
+    static final double FORWARD_SPEED = 1;
+
+    public String vColumn = "";
 
     @Override
     public void runOpMode() {
@@ -77,11 +81,12 @@ public class mecRedFront extends LinearOpMode{
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-
-        //Drop gemArm
+        stopAndResetEncoders();
+        relicTrackables.activate();
+        //dropGemArm
         sleep(3000);
-
         if(sensorColor.red() > sensorColor.blue()){
+            sleep(2000);
             drive(-2);
             sleep(1000);
             drive(2);
@@ -89,6 +94,7 @@ public class mecRedFront extends LinearOpMode{
             //pick up gemArm
         }
         if(sensorColor.blue() > sensorColor.red()){
+            sleep(2000);
             drive(2);
             sleep(1000);
             drive(-2);
@@ -96,8 +102,22 @@ public class mecRedFront extends LinearOpMode{
             //pick up gemArm
         }
 
-        //Activate after knocking the jewel
-//        relicTrackables.activate();
+        if(vColumn == "LEFT"){
+
+        }
+
+        if(vColumn == "RIGHT"){
+
+        }
+
+        if(vColumn == "CENTER"){
+
+        }
+
+        if(vColumn == "CD"){
+
+        }
+
 
         //END POWERS
         robot.leftWheelFront.setPower(0);
@@ -111,6 +131,7 @@ public class mecRedFront extends LinearOpMode{
 
         //color values
         while (opModeIsActive()) {
+            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
             // convert the RGB values to HSV values.
             // multiply by the SCALE_FACTOR.
             // then cast it back to int (SCALE_FACTOR is a double)
@@ -126,59 +147,25 @@ public class mecRedFront extends LinearOpMode{
             telemetry.addData("Blue ", sensorColor.blue());
             telemetry.addData("Hue", hsvValues[0]);
             telemetry.update();
-        }
-    }
 
-    public void forward(int time){
-        runtime.reset();
-        robot.leftWheelFront.setPower(FORWARD_SPEED);
-        robot.leftWheelBack.setPower(FORWARD_SPEED);
-        robot.rightWheelFront.setPower(FORWARD_SPEED);
-        robot.rightWheelBack.setPower(FORWARD_SPEED);
-        while (opModeIsActive() && (runtime.seconds() < time)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-    }
+            if(vuMark == RelicRecoveryVuMark.LEFT){
+                vColumn = "LEFT";
+            }
+            if(vuMark == RelicRecoveryVuMark.RIGHT){
+                vColumn = "RIGHT";
+            }
+            if(vuMark == RelicRecoveryVuMark.CENTER){
+                vColumn = "CENTER";
+            }
 
-    public void backward(int time){
-        runtime.reset();
-        robot.leftWheelFront.setPower(-FORWARD_SPEED);
-        robot.leftWheelBack.setPower(-FORWARD_SPEED);
-        robot.rightWheelFront.setPower(-FORWARD_SPEED);
-        robot.rightWheelBack.setPower(-FORWARD_SPEED);
-        while (opModeIsActive() && (runtime.seconds() < time)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-    }
-
-    public void left(int time){
-        runtime.reset();
-        robot.leftWheelFront.setPower(-FORWARD_SPEED);
-        robot.leftWheelBack.setPower(FORWARD_SPEED);
-        robot.rightWheelFront.setPower(FORWARD_SPEED);
-        robot.rightWheelBack.setPower(-FORWARD_SPEED);
-        while (opModeIsActive() && (runtime.seconds() < time)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-    }
-
-    public void right(int time){
-        runtime.reset();
-        robot.leftWheelFront.setPower(FORWARD_SPEED);
-        robot.leftWheelBack.setPower(-FORWARD_SPEED);
-        robot.rightWheelFront.setPower(-FORWARD_SPEED);
-        robot.rightWheelBack.setPower(FORWARD_SPEED);
-        while (opModeIsActive() && (runtime.seconds() < time)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
+            if(vuMark == RelicRecoveryVuMark.UNKNOWN){
+                vColumn = "CD";
+            }
         }
     }
 
     public void encoderTurn(double degrees) {
-        double circumference = 92.5;
+        double circumference = 92;
         double arc = circumference * (degrees / 360);
         encoderDrive(TURN_SPEED, arc, -arc, arc, -arc, 10.0);
     }
@@ -193,6 +180,26 @@ public class mecRedFront extends LinearOpMode{
 
     public void drive(double inches){
         encoderDrive(DRIVE_SPEED, inches,inches,inches,inches,10.0);
+    }
+
+    public void collectorWheel(int time, double speed){
+        runtime.reset();
+        robot.collectorLeft.setPower(speed);
+        robot.collectorRight.setPower(speed);
+        while (opModeIsActive() && (runtime.seconds() < time)) {
+            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
+    }
+
+    public void glyphUp(){
+        robot.liftLeft.setPosition(0);
+        robot.liftRight.setPosition(1);
+    }
+
+    public void glyphDown(){
+        robot.liftLeft.setPosition(1);
+        robot.liftRight.setPosition(0);
     }
 
     public void stopAndResetEncoders() {
