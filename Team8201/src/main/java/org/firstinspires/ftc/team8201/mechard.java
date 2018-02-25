@@ -38,6 +38,7 @@ public class mechard
         // Define and Initialize Motors
 
         //Wheels
+        //label them
         leftWheelFront  = hwMap.get(DcMotor.class, "lf");
         leftWheelBack  = hwMap.get(DcMotor.class, "lb");
         rightWheelFront = hwMap.get(DcMotor.class, "rf");
